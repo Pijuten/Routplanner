@@ -1,0 +1,8 @@
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<MenuBar>
+    <Menu mnemonicParsing="false" text="File"/>
+    <Menu mnemonicParsing="false" text="Edit"/>
+    <Menu mnemonicParsing="false" text="Options"/>
+    <Menu mnemonicParsing="false" text="Help"/>
+</MenuBar>

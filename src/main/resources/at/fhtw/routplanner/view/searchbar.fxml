@@ -1,0 +1,9 @@
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<HBox prefHeight="33.0" prefWidth="740.0"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="at.fhtw.routplanner.controller.SearchBarController">
+    <TextField prefHeight="45.0" prefWidth="675.0"/>
+    <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="74.0" text="Search"/>
+</HBox>

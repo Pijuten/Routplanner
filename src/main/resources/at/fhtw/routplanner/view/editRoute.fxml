@@ -1,0 +1,19 @@
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<BorderPane layoutX="7.0" prefHeight="40.0" prefWidth="200.0"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="at.fhtw.routplanner.controller.EditRoutController">
+    <right>
+        <HBox prefHeight="40.0" prefWidth="84.0" BorderPane.alignment="CENTER">
+            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="+"/>
+            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="-"/>
+            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="..."/>
+        </HBox>
+    </right>
+    <center>
+        <HBox prefHeight="40.0" prefWidth="101.0" BorderPane.alignment="CENTER">
+            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="74.0" text="Button"/>
+        </HBox>
+    </center>
+</BorderPane>

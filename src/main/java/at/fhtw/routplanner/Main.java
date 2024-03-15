@@ -13,7 +13,7 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLDependencyInjection.load("Main.fxml", Locale.GERMAN);
+        Parent root = FXMLDependencyInjection.load("main.fxml", Locale.GERMAN);
         Scene scene = new Scene(root);
 
         // Set the scene on the stage
@@ -21,7 +21,7 @@ public class Main extends Application {
 
         // Set the title of the stage
         stage.setTitle("Routplanner");
-
+        stage.setResizable(false);
         // Show the stage
         stage.show();
     }
