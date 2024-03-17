@@ -17,4 +17,5 @@ public class MainController {
         this.mainViewModel = mainViewModel;
     }
     public MainViewModel getMainViewModel(){return mainViewModel;}
+
 }

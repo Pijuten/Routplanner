@@ -16,4 +16,8 @@ public class MainViewModel {
         this.routAccordionViewModel = routAccordionViewModel;
         this.routBarViewModel = routBarViewModel;
     }
+
+    private void searchTours(String serachString){
+
+    }
 }
