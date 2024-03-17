@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+    <HBox layoutX="214.0" layoutY="274.0" prefHeight="167.0" prefWidth="515.0"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="at.fhtw.routplanner.controller.LogTableController"
+    >
+        <TableView prefHeight="165.0" prefWidth="526.0">
+            <columns>
+                <TableColumn prefWidth="175.0" text="C1"/>
+                <TableColumn prefWidth="175.0" text="C2"/>
+                <TableColumn prefWidth="175.0" text="C3"/>
+            </columns>
+        </TableView>
+    </HBox>

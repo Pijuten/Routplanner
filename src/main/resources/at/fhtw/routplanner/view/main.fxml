@@ -10,5 +10,8 @@
     <fx:include source="overwiewtab.fxml"/>
     <fx:include source="searchbar.fxml"/>
     <fx:include source="routebar.fxml"/>
+    <fx:include source="logBar.fxml"/>
+    <fx:include source="logTable.fxml"/>
+
   </AnchorPane>
 </VBox>

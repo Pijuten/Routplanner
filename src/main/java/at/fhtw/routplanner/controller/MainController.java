@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 
 public class MainController {
     @FXML private EditRoutController editRoutController;
+    @FXML private LogBarController logBarController;
+    @FXML private LogTableController logTableController;
     @FXML private OptionBarController optionBarController;
     @FXML private OverviewController overviewController;
     @FXML private RoutAccordionController routAccordionController;

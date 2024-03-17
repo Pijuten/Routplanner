@@ -1,16 +1,18 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.Tab?>
-<TabPane layoutX="214.0" layoutY="33.0" prefHeight="422.0" prefWidth="526.0" tabClosingPolicy="UNAVAILABLE"
+<TabPane layoutX="214.0" layoutY="33.0" prefHeight="205.0" prefWidth="526.0" tabClosingPolicy="UNAVAILABLE"
          xmlns:fx="http://javafx.com/fxml"
          fx:controller="at.fhtw.routplanner.controller.OverviewController">
-    <Tab text="General">
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="311.0" prefWidth="526.0"/>
-    </Tab>
-    <Tab text="Route">
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
-    </Tab>
-    <Tab text="Misc">
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
-    </Tab>
+    <tabs>
+        <Tab text="General">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="491.0"/>
+        </Tab>
+        <Tab text="Route">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+        </Tab>
+        <Tab text="Misc">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+        </Tab>
+    </tabs>
 </TabPane>

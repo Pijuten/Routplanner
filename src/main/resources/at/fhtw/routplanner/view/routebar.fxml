@@ -3,6 +3,6 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="at.fhtw.routplanner.controller.RoutBarController"
 >
-  <fx:include source="editRoute.fxml"/>
   <fx:include source="routeAccordion.fxml"/>
+  <fx:include source="editRoute.fxml"/>
 </AnchorPane>

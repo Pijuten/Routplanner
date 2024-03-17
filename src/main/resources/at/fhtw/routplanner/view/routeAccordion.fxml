@@ -1,28 +1,14 @@
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ScrollPane?>
 <BorderPane layoutX="7.0" layoutY="43.0" prefHeight="372.0" prefWidth="200.0"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="at.fhtw.routplanner.controller.RoutAccordionController">
-    <center>
-        <Accordion prefHeight="399.0" prefWidth="195.0" BorderPane.alignment="CENTER">
-            <panes>
-                <TitledPane animated="false" prefHeight="334.0" prefWidth="200.0"
-                            text="untitled 1">
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
-                                prefWidth="200.0"/>
-                </TitledPane>
-                <TitledPane animated="false" text="untitled 2">
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
-                                prefWidth="200.0"/>
-                </TitledPane>
-                <TitledPane animated="false" prefHeight="336.0" prefWidth="155.0"
-                            text="untitled 3">
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
-                                prefWidth="200.0"/>
-                </TitledPane>
-            </panes>
-        </Accordion>
-    </center>
-</BorderPane>
+        <right>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                </content>
+            </ScrollPane>
+        </right>
+    </BorderPane>
