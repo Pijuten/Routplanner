@@ -21,7 +21,6 @@ public class Main extends Application {
 
         // Set the title of the stage
         stage.setTitle("Routplanner");
-        stage.setResizable(false);
         // Show the stage
         stage.show();
     }

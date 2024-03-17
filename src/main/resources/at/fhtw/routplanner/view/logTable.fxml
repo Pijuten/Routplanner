@@ -3,16 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-    <HBox layoutX="214.0" layoutY="274.0" prefHeight="167.0" prefWidth="515.0"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:controller="at.fhtw.routplanner.controller.LogTableController"
-    >
-        <TableView prefHeight="165.0" prefWidth="526.0">
-            <columns>
-                <TableColumn prefWidth="175.0" text="C1"/>
-                <TableColumn prefWidth="175.0" text="C2"/>
-                <TableColumn prefWidth="175.0" text="C3"/>
-            </columns>
-        </TableView>
-    </HBox>
+<TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="at.fhtw.routplanner.controller.LogTableController"
+>
+<columns>
+    <TableColumn prefWidth="150.0" resizable="false" text="C1"/>
+    <TableColumn prefWidth="150.0" resizable="false" text="C2"/>
+    <TableColumn prefWidth="150.0" resizable="false" text="C1"/>
+</columns>
+</TableView>

@@ -1,18 +1,13 @@
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.Tab?>
-<TabPane layoutX="214.0" layoutY="33.0" prefHeight="205.0" prefWidth="526.0" tabClosingPolicy="UNAVAILABLE"
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+
+<TabPane prefHeight="180.0" prefWidth="453.0" tabClosingPolicy="UNAVAILABLE"
          xmlns:fx="http://javafx.com/fxml"
-         fx:controller="at.fhtw.routplanner.controller.OverviewController">
-    <tabs>
-        <Tab text="General">
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="491.0"/>
-        </Tab>
-        <Tab text="Route">
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
-        </Tab>
-        <Tab text="Misc">
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
-        </Tab>
-    </tabs>
+         fx:controller="at.fhtw.routplanner.controller.LogTableController"
+>
+    <Tab text="Untitled Tab 1"/>
+    <Tab text="Untitled Tab 2">
+        <Separator prefWidth="200.0"/>
+    </Tab>
 </TabPane>

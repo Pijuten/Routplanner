@@ -1,8 +1,13 @@
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane layoutY="33.0" prefHeight="422.0" prefWidth="214.0"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="at.fhtw.routplanner.controller.RoutBarController"
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ScrollPane?>
+<VBox prefHeight="343.0" prefWidth="187.0" BorderPane.alignment="CENTER"
+
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="at.fhtw.routplanner.controller.RoutBarController"
 >
-  <fx:include source="routeAccordion.fxml"/>
-  <fx:include source="editRoute.fxml"/>
-</AnchorPane>
+    <fx:include source="editRoute.fxml"/>
+    <fx:include source="routeAccordion.fxml" VBox.vgrow="ALWAYS"/>
+</VBox>

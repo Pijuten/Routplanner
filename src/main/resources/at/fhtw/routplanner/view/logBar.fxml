@@ -1,19 +1,30 @@
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<BorderPane layoutX="214.0" layoutY="244.0" prefHeight="27.0" prefWidth="515.0"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="at.fhtw.routplanner.controller.LogBarController"
->
-    <right>
-        <HBox prefHeight="40.0" prefWidth="84.0" BorderPane.alignment="CENTER">
-            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="+"/>
-            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="-"/>
-            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="..."/>
-        </HBox>
-    </right>
-    <left>
-        <Label text="LOG" BorderPane.alignment="CENTER" />
-    </left>
-</BorderPane>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<HBox prefHeight="32.0" prefWidth="453.0"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="at.fhtw.routplanner.controller.LogTableController">
+    <BorderPane prefHeight="32.0" prefWidth="455.0" HBox.hgrow="ALWAYS">
+        <left>
+            <Label text="Label" BorderPane.alignment="CENTER">
+                <padding>
+                    <Insets left="5.0"/>
+                </padding>
+            </Label>
+        </left>
+        <right>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0"
+                  BorderPane.alignment="TOP_LEFT">
+                <padding>
+                    <Insets right="5.0"/>
+                </padding>
+                <Button mnemonicParsing="false" text="Button"/>
+                <Button mnemonicParsing="false" text="Button"/>
+                <Button mnemonicParsing="false" text="Button"/>
+            </HBox>
+        </right>
+    </BorderPane>
+</HBox>
