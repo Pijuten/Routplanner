@@ -3,13 +3,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS"
-           xmlns:fx="http://javafx.com/fxml"
-           fx:controller="at.fhtw.routplanner.controller.LogTableController"
+<TableView
+        prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS"
+        minHeight="200"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="at.fhtw.routplanner.controller.LogTableController"
+        fx:id="tableView"
 >
-<columns>
-    <TableColumn prefWidth="150.0" resizable="false" text="C1"/>
-    <TableColumn prefWidth="150.0" resizable="false" text="C2"/>
-    <TableColumn prefWidth="150.0" resizable="false" text="C1"/>
-</columns>
+    <columns>
+        <TableColumn fx:id="dateColumn" prefWidth="150.0" resizable="false" text="Date"/>
+        <TableColumn fx:id="durationColumn" prefWidth="150.0" resizable="false" text="Duration"/>
+        <TableColumn fx:id="distanceColumn" prefWidth="150.0" resizable="false" text="Distance"/>
+    </columns>
+
 </TableView>

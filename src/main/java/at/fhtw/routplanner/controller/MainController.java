@@ -20,4 +20,5 @@ public class MainController {
     }
     public MainViewModel getMainViewModel(){return mainViewModel;}
 
+    @FXML void initialize(){};
 }

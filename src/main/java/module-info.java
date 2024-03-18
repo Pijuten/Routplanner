@@ -5,5 +5,6 @@ module at.fhtw.routplanner {
 
     opens at.fhtw.routplanner to javafx.fxml;
     opens at.fhtw.routplanner.controller to javafx.fxml;
+    opens at.fhtw.routplanner.model to javafx.base;
     exports at.fhtw.routplanner;
 }

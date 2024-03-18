@@ -2,9 +2,9 @@
 
 <?import javafx.scene.control.*?>
 
-<TabPane prefHeight="180.0" prefWidth="453.0" tabClosingPolicy="UNAVAILABLE"
+<TabPane prefHeight="500.0" prefWidth="453.0" tabClosingPolicy="UNAVAILABLE"
          xmlns:fx="http://javafx.com/fxml"
-         fx:controller="at.fhtw.routplanner.controller.LogTableController"
+         fx:controller="at.fhtw.routplanner.controller.OverviewController"
 >
     <Tab text="Untitled Tab 1"/>
     <Tab text="Untitled Tab 2">
