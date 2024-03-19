@@ -3,20 +3,22 @@ package at.fhtw.routplanner.model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+
 public class Log {
-    //muss man noch ueberlegen, ob es ein timestamp in der db sein soll
+    private StringProperty id;
     private StringProperty date;
     private StringProperty timeStamp;
     private StringProperty difficulty;
     private StringProperty distance;
     private StringProperty timeLength;
     private StringProperty rating;
-    public Log(String date,
-        String timeStamp,
-        String difficulty,
-        String distance,
-        String timeLength,
-        String rating){
+    public Log(String id, String date,
+               String timeStamp,
+               String difficulty,
+               String distance,
+               String timeLength,
+               String rating){
+        this.id = new SimpleStringProperty(id);
         this.date=new SimpleStringProperty(date);
         this.timeStamp=new SimpleStringProperty(timeStamp);
         this.difficulty=new SimpleStringProperty(difficulty);
@@ -95,5 +97,17 @@ public class Log {
 
     public void setRating(String rating) {
         this.rating.set(rating);
+    }
+
+    public String getId() {
+        return id.get();
+    }
+
+    public StringProperty idProperty() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id.set(id);
     }
 }

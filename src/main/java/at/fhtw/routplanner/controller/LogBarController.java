@@ -1,5 +1,6 @@
 package at.fhtw.routplanner.controller;
 
+import at.fhtw.routplanner.model.Log;
 import at.fhtw.routplanner.viewModel.LogBarViewModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -35,15 +36,20 @@ public class LogBarController implements Initializable {
 
         tableView.setItems(logBarViewModel.getData());
 
-        removeButton.setOnAction(event);
+        removeButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Log selectedLog = (Log) tableView.getSelectionModel().getSelectedItem();
+                if (selectedLog != null) {
+                    String id = selectedLog.getId();
+                    System.out.println("Selected Log ID: " + id);
+                    logBarViewModel.removeLog(id);
+                } else {
+                    System.out.println("No item selected.");
+                }
+            }
+        });
+
     }
-    EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent e) {
-            // Your action here
-           tableView.getItems().removeAll(
-                   tableView.getSelectionModel().getSelectedItems()
-           );
-        }
-    };
+
 }
