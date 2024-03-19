@@ -6,8 +6,7 @@
          xmlns:fx="http://javafx.com/fxml"
          fx:controller="at.fhtw.routplanner.controller.OverviewController"
 >
-    <Tab text="Untitled Tab 1"/>
-    <Tab text="Untitled Tab 2">
-        <Separator prefWidth="200.0"/>
-    </Tab>
+    <Tab text="%overviewTab.general"/>
+    <Tab text="%overviewTab.rout"/>
+    <Tab text="%overviewTab.misc"/>
 </TabPane>

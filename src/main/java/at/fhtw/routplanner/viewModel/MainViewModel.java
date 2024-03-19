@@ -1,29 +1,28 @@
 package at.fhtw.routplanner.viewModel;
 
-import at.fhtw.routplanner.controller.LogTableController;
+import at.fhtw.routplanner.enums.TransportType;
+import at.fhtw.routplanner.model.Log;
+import at.fhtw.routplanner.model.Tour;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainViewModel {
     private SearchBarViewModel searchBarViewModel;
-    private EditRoutViewModel editRoutViewModel;
     private LogBarViewModel logBarViewModel;
-    private LogTableViewModel logTableViewModel;
     private OptionBarViewModel optionBarViewModel;
     private OverviewViewModel overviewViewModel;
-    private RoutAccordionViewModel routAccordionViewModel;
     private RoutBarViewModel routBarViewModel;
 
-    public MainViewModel( EditRoutViewModel editRoutViewModel, LogBarViewModel logBarViewModel, LogTableViewModel logTableViewModel, OptionBarViewModel optionBarViewModel, OverviewViewModel overviewViewModel, RoutAccordionViewModel routAccordionViewModel, RoutBarViewModel routBarViewModel,SearchBarViewModel searchBarViewModel) {
+    private ObservableList<Tour> tours;
+
+    public MainViewModel(LogBarViewModel logBarViewModel, OptionBarViewModel optionBarViewModel, OverviewViewModel overviewViewModel, RoutBarViewModel routBarViewModel,SearchBarViewModel searchBarViewModel) {
         this.searchBarViewModel = searchBarViewModel;
-        this.editRoutViewModel = editRoutViewModel;
         this.logBarViewModel = logBarViewModel;
-        this.logTableViewModel = logTableViewModel;
         this.optionBarViewModel = optionBarViewModel;
         this.overviewViewModel = overviewViewModel;
-        this.routAccordionViewModel = routAccordionViewModel;
         this.routBarViewModel = routBarViewModel;
-    }
-
-    private void searchTours(String serachString){
-
     }
 }

@@ -4,12 +4,14 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<HBox prefHeight="32.0" prefWidth="453.0"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="at.fhtw.routplanner.controller.LogBarController">
+<VBox
+
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="at.fhtw.routplanner.controller.LogBarController">
+<HBox prefHeight="32.0" prefWidth="453.0">
     <BorderPane prefHeight="32.0" prefWidth="455.0" HBox.hgrow="ALWAYS">
         <left>
-            <Label text="Label" BorderPane.alignment="CENTER">
+            <Label text="%logBar.logLabel" BorderPane.alignment="CENTER">
                 <padding>
                     <Insets left="5.0"/>
                 </padding>
@@ -21,10 +23,23 @@
                 <padding>
                     <Insets right="5.0"/>
                 </padding>
-                <Button mnemonicParsing="false" text="Button"/>
-                <Button mnemonicParsing="false" text="Button"/>
-                <Button mnemonicParsing="false" text="Button"/>
+                <Button mnemonicParsing="false" text="+"/>
+                <Button fx:id="removeButton" mnemonicParsing="false" text="-"/>
+                <Button mnemonicParsing="false" text="..."/>
             </HBox>
         </right>
     </BorderPane>
 </HBox>
+    <TableView
+            prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS"
+            minHeight="200"
+            fx:id="tableView"
+    >
+        <columns>
+            <TableColumn fx:id="dateColumn" prefWidth="150.0" resizable="false" text="%logTable.date"/>
+            <TableColumn fx:id="durationColumn" prefWidth="150.0" resizable="false" text="%logTable.duration"/>
+            <TableColumn fx:id="distanceColumn" prefWidth="150.0" resizable="false" text="%logTable.distance"/>
+        </columns>
+
+    </TableView>
+</VBox>
