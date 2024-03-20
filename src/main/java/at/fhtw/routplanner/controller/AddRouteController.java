@@ -73,6 +73,7 @@ public class AddRouteController implements Initializable {
         tour.setStartPoint(startPointTextField.getText());
         tour.setEndPoint(endpointTextField.getText());
         tour.setTransportType(TransportType.fromDisplayName(vehicleComboBox.getValue().toString()));
+        routBarController.editTour(tour);
         stage.close();
     }
 

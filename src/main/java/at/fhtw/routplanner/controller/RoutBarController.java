@@ -120,6 +120,7 @@ public class RoutBarController implements Initializable {
         routBarViewModel.addTour(tour);
     }
     public void editTour(Tour tour){
+        tourListView.refresh();
         routBarViewModel.editTour(tour);
     }
 }
