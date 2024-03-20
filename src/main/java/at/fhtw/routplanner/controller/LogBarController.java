@@ -80,7 +80,6 @@ public class LogBarController implements Initializable {
             AddLogController addLogController = loader.getController();
             addLogController.setStage(stage);
             addLogController.setLogBarController(this);
-            addLogController.setComboBoxElements();
             addLogController.setSaveButtonAction();
 
             stage.setScene(scene);
@@ -91,6 +90,35 @@ public class LogBarController implements Initializable {
     }
 
     private void editButtonListener(Button editButton) {
+        editButton.setOnAction(event -> {
+            Log log = (Log) tableView.getSelectionModel().getSelectedItem();
+            if (log==null)
+                return;
+            FXMLLoader loader = new FXMLLoader(
+                    FXMLDependencyInjection.class.getResource("/at/fhtw/routplanner/view/addLog.fxml"),
+                    ResourceBundle.getBundle("at.fhtw.routplanner.view." + "gui_strings", Locale.GERMAN)
+            );
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+
+            AddLogController addLogController = loader.getController();
+            addLogController.setStage(stage);
+            addLogController.setLogBarController(this);
+            addLogController.setLog(log);
+            addLogController.setComboBoxElements();
+            addLogController.setEditButtonAction();
+
+            stage.setScene(scene);
+            stage.setResizable(false);
+
+            stage.show();
+        });
 
     }
 
@@ -98,7 +126,8 @@ public class LogBarController implements Initializable {
         logBarViewModel.saveLog(log);
     }
 
-    public void editLog() {
-        logBarViewModel.editLog();
+    public void editLog(Log log) {
+        tableView.refresh();
+        logBarViewModel.editLog(log);
     }
 }

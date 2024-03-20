@@ -43,7 +43,8 @@ public class LogBarViewModel implements UpdateTourListener {
         }
     }
 
-    public void editLog() {
+    public void editLog(Log log) {
+
     }
 
     public void saveLog(Log log) {

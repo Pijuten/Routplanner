@@ -15,7 +15,7 @@ public class RoutBarViewModel {
 
     public RoutBarViewModel(){
         List<Log> logList = new ArrayList<>();
-        Log log1 = new Log("1", LocalDate.now(), 123, 3, 10.5f, 1.5f, 5);
+        Log log1 = new Log("1", LocalDate.now(), "test" ,123, 3, 10.5f, 1.5f, 5);
 
 
         logList.add(log1);

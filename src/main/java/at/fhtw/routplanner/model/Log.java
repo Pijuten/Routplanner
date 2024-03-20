@@ -11,6 +11,7 @@ import java.time.LocalDate;
 public class Log {
     private String id;
     private LocalDate date;
+    private String comment;
     private Integer timeStamp;
     private Integer difficulty;
     private Float distance;

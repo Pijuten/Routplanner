@@ -34,11 +34,23 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <Label alignment="CENTER" GridPane.halignment="RIGHT" text="%addLog.date"  GridPane.rowIndex="1"/>
+            <Label fx:id="dateErrorLabel" alignment="CENTER" visible="false" text="%addLog.dateError" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+
             <Label alignment="CENTER" text="%addLog.comment" GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
+            <Label fx:id="commentErrorLabel" alignment="CENTER" visible="false" text="%addLog.commentError" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+
             <Label alignment="CENTER" text="%addLog.difficulty" GridPane.halignment="RIGHT" GridPane.rowIndex="3"/>
+            <Label fx:id="difficultyErrorLabel" alignment="CENTER" visible="false" text="%addLog.difficultyError" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+
             <Label alignment="CENTER" text="%addLog.distance" GridPane.halignment="RIGHT" GridPane.rowIndex="4"/>
+            <Label fx:id="distanceErrorLabel" alignment="CENTER" visible="false" text="%addLog.distanceError" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+
             <Label alignment="CENTER" text="%addLog.time" GridPane.halignment="RIGHT" GridPane.rowIndex="5"/>
+            <Label fx:id="timeErrorLabel" alignment="CENTER" visible="false" text="%addLog.timeError" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
+
             <Label alignment="CENTER" text="%addLog.rating" GridPane.halignment="RIGHT" GridPane.rowIndex="6"/>
+            <Label fx:id="ratingErrorLabel" alignment="CENTER" visible="false" text="%addLog.ratingError" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.columnIndex="2"/>
+
             <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                 <GridPane.margin>
                     <Insets left="5.0" right="5.0"/>
@@ -54,12 +66,12 @@
                     <Insets left="5.0" right="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <TextField fx:id="distanceTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS">
+            <TextField fx:id="distanceTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
                 <GridPane.margin>
                     <Insets left="5.0" right="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <TextField fx:id="timeTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
+            <TextField fx:id="timeTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS">
                 <GridPane.margin>
                     <Insets left="5.0" right="5.0"/>
                 </GridPane.margin>
