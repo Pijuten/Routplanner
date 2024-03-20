@@ -44,4 +44,7 @@ public class RoutBarViewModel {
     }
     public void selectTour(){
     }
+
+    public void editTour(Tour tour) {
+    }
 }
