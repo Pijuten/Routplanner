@@ -41,11 +41,20 @@
            </TextField>
 
            <Label alignment="CENTER" text="%addRout.tourName" GridPane.halignment="RIGHT" GridPane.rowIndex="0"/>
+           <Label fx:id="tourNameErrorLabel" alignment="CENTER" visible="false" text="%addRout.tourNameError" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+
            <Label alignment="CENTER" text="%addRout.description"  GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
+           <Label fx:id="descriptionErrorLabel" alignment="CENTER" visible="false" text="%addRout.descriptionError" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+
            <Label alignment="CENTER" text="%addRout.startPoint"  GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
+           <Label fx:id="startPointErrorLabel" alignment="CENTER" visible="false" text="%addRout.startPointError" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+
            <Label alignment="CENTER" text="%addRout.endPoint"  GridPane.halignment="RIGHT" GridPane.rowIndex="3"/>
+           <Label fx:id="endPointErrorLabel" alignment="CENTER" visible="false" text="%addRout.endPointError" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+
            <Label alignment="CENTER" text="%addRout.vehicle"  GridPane.halignment="RIGHT" GridPane.rowIndex="4"/>
-           <Label fx:id="errorText" text="Error" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.halignment="CENTER"/>
+           <Label fx:id="vehicleSelectionErrorLabel" alignment="CENTER" visible="false" text="%addRout.vehicleTypeError" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+
            <ComboBox fx:id="vehicleComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
               <GridPane.margin>
                   <Insets left="5.0" right="5.0"/>

@@ -2,7 +2,6 @@ package at.fhtw.routplanner.model;
 
 
 import at.fhtw.routplanner.enums.TransportType;
-import javafx.beans.property.SimpleStringProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,4 +26,5 @@ public class Tour {
     public void addLog(Log log) {
         this.logs.add(log);
     }
+
 }

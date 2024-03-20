@@ -71,7 +71,6 @@ public class RoutBarController implements Initializable {
             Stage stage = new Stage();
             AddRouteController addRouteController = loader.getController();
             addRouteController.setStage(stage);
-            addRouteController.setFlagAddOrEdit(0);
             addRouteController.setRoutBarController(this);
             addRouteController.setComboBoxElements();
             addRouteController.setSaveButtonAction();

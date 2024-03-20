@@ -6,6 +6,7 @@ import at.fhtw.routplanner.model.Tour;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +15,9 @@ public class RoutBarViewModel {
 
     public RoutBarViewModel(){
         List<Log> logList = new ArrayList<>();
-        Log log1 = new Log("23eda","2e","233","23","23","23","23");
+        Log log1 = new Log("1", LocalDate.now(), 123, 3, 10.5f, 1.5f, 5);
+
+
         logList.add(log1);
         Tour tour1 = new Tour("2323231","Test","test","start","end", TransportType.Bike,3.4f,2.3f,"test",logList);
         Tour tour2 = new Tour("6776","Test2","test","start","end", TransportType.Bike,3.4f,2.3f,"test",null);

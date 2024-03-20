@@ -13,27 +13,28 @@ import javafx.stage.Stage;
 import lombok.Setter;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddRouteController implements Initializable {
     public Button saveButton;
     public Button cancleButton;
     public ComboBox vehicleComboBox;
-    public Label errorText;
     public TextField endpointTextField;
     public TextField tourNameTextField;
     public TextField startPointTextField;
     public TextField descriptionTextField;
+    public Label tourNameErrorLabel;
+    public Label descriptionErrorLabel;
+    public Label startPointErrorLabel;
+    public Label endPointErrorLabel;
+    public Label vehicleSelectionErrorLabel;
     @Setter
     private Tour tour;
     @Setter
     private RoutBarController routBarController;
     @Setter
     private Stage stage;
-    @Setter
-    private int flagAddOrEdit=0;
 
 
     @Override
@@ -48,7 +49,6 @@ public class AddRouteController implements Initializable {
         }
         vehicleComboBox.setItems(items);
         if(tour==null){
-            System.out.println("No tour");
             return;
         }
         tourNameTextField.setText(tour.getTourName());
@@ -58,16 +58,31 @@ public class AddRouteController implements Initializable {
         vehicleComboBox.setValue(tour.getTransportType().toString());
     }
 
+
+    public void setEditButtonAction() {
+        saveButton.setOnAction(actionEvent -> editTour());
+    }
+    public void setSaveButtonAction(){
+        saveButton.setOnAction(actionEvent -> saveTour());
+    }
+
     public void saveTour(){
+        setErrorTextInvis();
+        if(!checkInput()){
+            return;
+        }
         Tour tour = new Tour("we221e",tourNameTextField.getText(),descriptionTextField.getText(),startPointTextField.getText(),endpointTextField.getText(),TransportType.fromDisplayName(vehicleComboBox.getValue().toString()),43.3f,23.f,"test",null);
         routBarController.saveTour(tour);
-        errorText.setVisible(true);
         stage.close();
     }
 
     public void editTour() {
         //Tour tour = new Tour("we221e",tourNameTextField.getText(),descriptionTextField.getText(),startPointTextField.getText(),endpointTextField.getText(),TransportType.fromDisplayName(vehicleComboBox.getValue().toString()),43.3f,23.f,"test",null);
         //routBarController.editTour(tour);
+        setErrorTextInvis();
+        if(!checkInput()){
+            return;
+        }
         tour.setTourName(tourNameTextField.getText());
         tour.setDescription(descriptionTextField.getText());
         tour.setStartPoint(startPointTextField.getText());
@@ -77,10 +92,31 @@ public class AddRouteController implements Initializable {
         stage.close();
     }
 
-    public void setEditButtonAction() {
-        saveButton.setOnAction(actionEvent -> editTour());
+
+    private boolean checkInput(){
+        if(Objects.equals(tourNameTextField.getText(), "") ){
+            tourNameErrorLabel.setVisible(true);
+            return false;
+        } else if(Objects.equals(descriptionTextField.getText(), "") ){
+            descriptionErrorLabel.setVisible(true);
+            return false;
+        }else if(Objects.equals(startPointTextField.getText(), "") ){
+            startPointErrorLabel.setVisible(true);
+            return false;
+        }else if(Objects.equals(endpointTextField.getText(), "") ){
+            endPointErrorLabel.setVisible(true);
+            return false;
+        }else if(Objects.equals(vehicleComboBox.getValue(), null) ){
+            vehicleSelectionErrorLabel.setVisible(true);
+            return false;
+        }
+        return true;
     }
-    public void setSaveButtonAction(){
-        saveButton.setOnAction(actionEvent -> saveTour());
+    public void setErrorTextInvis(){
+            tourNameErrorLabel.setVisible(false);
+            descriptionErrorLabel.setVisible(false);
+            startPointErrorLabel.setVisible(false);
+            endPointErrorLabel.setVisible(false);
+            vehicleSelectionErrorLabel.setVisible(false);
     }
 }
