@@ -5,9 +5,11 @@ import at.fhtw.routplanner.enums.TransportType;
 import javafx.beans.property.SimpleStringProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class Tour {
     private String id;
