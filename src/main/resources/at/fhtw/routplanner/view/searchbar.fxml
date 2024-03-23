@@ -8,13 +8,13 @@
 >
     <TextField prefHeight="45.0" prefWidth="573.0" HBox.hgrow="ALWAYS">
         <HBox.margin>
-            <Insets left="5.0" right="5.0"/>
+            <Insets left="5.0" right="5.0" bottom="5.0"/>
         </HBox.margin>
     </TextField>
     <Button fx:id="searchButton" minWidth="70.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="52.0" text="Search"
             HBox.hgrow="ALWAYS">
         <HBox.margin>
-            <Insets right="5.0"/>
+            <Insets right="5.0" bottom="5.0"/>
         </HBox.margin>
     </Button>
 </HBox>

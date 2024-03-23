@@ -57,28 +57,7 @@ public class RoutBarController implements Initializable {
     private void addButtonListener(Button addButton) {
 
         addButton.setOnAction(event -> {
-            FXMLLoader loader = new FXMLLoader(
-                    FXMLDependencyInjection.class.getResource("/at/fhtw/routplanner/view/addRoute.fxml"),
-                    ResourceBundle.getBundle("at.fhtw.routplanner.view." + "gui_strings", Locale.GERMAN)
-            );
-            Parent root = null;
-            try {
-                root = loader.load();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            AddRouteController addRouteController = loader.getController();
-            addRouteController.setStage(stage);
-            addRouteController.setRoutBarController(this);
-            addRouteController.setComboBoxElements();
-            addRouteController.setSaveButtonAction();
-
-            stage.setScene(scene);
-            stage.setResizable(false);
-
-            stage.show();
+            setupStage(null);
         });
     }
     private void editButtonListener(Button editButton) {
@@ -89,30 +68,7 @@ public class RoutBarController implements Initializable {
                 System.out.println("No item selected.");
                 return;
             }
-            FXMLLoader loader = new FXMLLoader(
-                    FXMLDependencyInjection.class.getResource("/at/fhtw/routplanner/view/addRoute.fxml"),
-                    ResourceBundle.getBundle("at.fhtw.routplanner.view." + "gui_strings", Locale.GERMAN)
-            );
-            Parent root = null;
-            try {
-                root = loader.load();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-
-            AddRouteController addRouteController = loader.getController();
-            addRouteController.setStage(stage);
-            addRouteController.setRoutBarController(this);
-            addRouteController.setTour(selectedTour);
-            addRouteController.setComboBoxElements();
-            addRouteController.setEditButtonAction();
-
-            stage.setScene(scene);
-            stage.setResizable(false);
-
-            stage.show();
+            setupStage(selectedTour);
         });
     }
     public void saveTour(Tour tour) {
@@ -121,5 +77,32 @@ public class RoutBarController implements Initializable {
     public void editTour(Tour tour){
         tourListView.refresh();
         routBarViewModel.editTour(tour);
+    }
+    private void setupStage(Tour selectedTour){
+
+        FXMLLoader loader = new FXMLLoader(
+                FXMLDependencyInjection.class.getResource("/at/fhtw/routplanner/view/addRoute.fxml"),
+                ResourceBundle.getBundle("at.fhtw.routplanner.view." + "gui_strings", Locale.GERMAN)
+        );
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+
+        AddRouteController addRouteController = loader.getController();
+        addRouteController.setStage(stage);
+        addRouteController.setRoutBarController(this);
+        addRouteController.setTour(selectedTour);
+        addRouteController.setButtonAction();
+        addRouteController.setComboBoxElements();
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+
+        stage.show();
     }
 }

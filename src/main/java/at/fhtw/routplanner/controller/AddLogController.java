@@ -1,6 +1,9 @@
 package at.fhtw.routplanner.controller;
 
 import at.fhtw.routplanner.model.Log;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -10,8 +13,8 @@ import javafx.stage.Stage;
 import lombok.Setter;
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
+
 
 public class AddLogController implements Initializable {
     public Button saveButton;
@@ -37,24 +40,29 @@ public class AddLogController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        cancelButton.setOnAction(actionEvent -> stage.close());
+        if (stage != null) {
+            cancelButton.setOnAction(actionEvent -> stage.close());
+        }
     }
 
     public void setComboBoxElements() {
-        datePicker.setValue(log.getDate());
-        commentTextField.setText(log.getComment());
-        difficultyTextField.setText(String.valueOf(log.getDifficulty()));
-        distanceTextField.setText(String.valueOf(log.getDistance()));
-        timeTextField.setText(String.valueOf(log.getTimeStamp()));
-        ratingTextField.setText(String.valueOf(log.getRating()));
+        if (log != null) {
+            datePicker.valueProperty().bindBidirectional(new SimpleObjectProperty<>(log.getDate()));
+            commentTextField.textProperty().bindBidirectional(new SimpleStringProperty(log.getComment()));
+            difficultyTextField.textProperty().bindBidirectional(new SimpleStringProperty(log.getDifficulty().toString()));
+            distanceTextField.textProperty().bindBidirectional(new SimpleStringProperty(log.getDistance().toString()));
+            timeTextField.textProperty().bindBidirectional(new SimpleStringProperty(log.getTimeLength().toString()));
+            ratingTextField.textProperty().bindBidirectional(new SimpleStringProperty(log.getRating().toString()));
+        }
     }
 
-    public void setSaveButtonAction() {
-        saveButton.setOnAction(actionEvent -> saveLog());
-    }
 
-    public void setEditButtonAction() {
-        saveButton.setOnAction(actionEvent -> editLog());
+    public void setButtonAction() {
+        if (log == null) {
+            saveButton.setOnAction(actionEvent -> saveLog());
+        } else {
+            saveButton.setOnAction(actionEvent -> editLog());
+        }
     }
 
     private void saveLog() {
@@ -84,23 +92,23 @@ public class AddLogController implements Initializable {
     }
 
     private boolean checkInput() {
-        if (Objects.equals(datePicker.getValue(), null)) {
+        if (datePicker.getValue() == null) {
             dateErrorLabel.setVisible(true);
             return false;
-        } else if (Objects.equals(commentTextField.getText(), "")) {
+        } else if (commentTextField.getText().isEmpty()) {
             commentErrorLabel.setVisible(true);
             return false;
-        } else if (Objects.equals(difficultyTextField.getText(), "") || !difficultyTextField.getText().matches("^(0|[1-9]|10)$")) {
+        } else if (difficultyTextField.getText().isEmpty() || !difficultyTextField.getText().matches("^(0|[1-9]|10)$")) {
             difficultyErrorLabel.setVisible(true);
             return false;
-        } else if (Objects.equals(distanceTextField.getText(), "") || !distanceTextField.getText().matches("^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$")) {
+        } else if (distanceTextField.getText().isEmpty() || !distanceTextField.getText().matches("^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$")) {
             distanceErrorLabel.setVisible(true);
             System.out.println("no dis");
             return false;
-        } else if (Objects.equals(timeTextField.getText(), "") || !timeTextField.getText().matches("^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$")) {
+        } else if (timeTextField.getText().isEmpty() || !timeTextField.getText().matches("^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$")) {
             timeErrorLabel.setVisible(true);
             return false;
-        } else if (Objects.equals(ratingTextField.getText(), "") || !ratingTextField.getText().matches("^[1-5]$")) {
+        } else if (ratingTextField.getText().isEmpty() || !ratingTextField.getText().matches("^[1-5]$")) {
             ratingErrorLabel.setVisible(true);
             return false;
         }

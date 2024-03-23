@@ -20,7 +20,7 @@
         <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
           <fx:include source="overwiewtab.fxml"/>
           <Separator prefWidth="200.0"/>
-          <fx:include source="logBar.fxml"/>
+          <fx:include source="logBar.fxml" VBox.vgrow="ALWAYS"/>
         </VBox>
       </center>
     </BorderPane>

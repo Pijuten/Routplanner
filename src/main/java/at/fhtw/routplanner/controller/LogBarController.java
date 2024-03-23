@@ -65,27 +65,7 @@ public class LogBarController implements Initializable {
 
             if (logBarViewModel.getTour()==null)
                 return;
-            FXMLLoader loader = new FXMLLoader(
-                    FXMLDependencyInjection.class.getResource("/at/fhtw/routplanner/view/addLog.fxml"),
-                    ResourceBundle.getBundle("at.fhtw.routplanner.view." + "gui_strings", Locale.GERMAN)
-            );
-            Parent root = null;
-            try {
-                root = loader.load();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            AddLogController addLogController = loader.getController();
-            addLogController.setStage(stage);
-            addLogController.setLogBarController(this);
-            addLogController.setSaveButtonAction();
-
-            stage.setScene(scene);
-            stage.setResizable(false);
-
-            stage.show();
+            setupStage(null);
         });
     }
 
@@ -94,34 +74,36 @@ public class LogBarController implements Initializable {
             Log log = (Log) tableView.getSelectionModel().getSelectedItem();
             if (log==null)
                 return;
-            FXMLLoader loader = new FXMLLoader(
-                    FXMLDependencyInjection.class.getResource("/at/fhtw/routplanner/view/addLog.fxml"),
-                    ResourceBundle.getBundle("at.fhtw.routplanner.view." + "gui_strings", Locale.GERMAN)
-            );
-            Parent root = null;
-            try {
-                root = loader.load();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-
-            AddLogController addLogController = loader.getController();
-            addLogController.setStage(stage);
-            addLogController.setLogBarController(this);
-            addLogController.setLog(log);
-            addLogController.setComboBoxElements();
-            addLogController.setEditButtonAction();
-
-            stage.setScene(scene);
-            stage.setResizable(false);
-
-            stage.show();
+            setupStage(log);
         });
 
     }
+    private void setupStage(Log selectedLog){
+        FXMLLoader loader = new FXMLLoader(
+                FXMLDependencyInjection.class.getResource("/at/fhtw/routplanner/view/addLog.fxml"),
+                ResourceBundle.getBundle("at.fhtw.routplanner.view." + "gui_strings", Locale.GERMAN)
+        );
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
 
+        AddLogController addLogController = loader.getController();
+        addLogController.setStage(stage);
+        addLogController.setLogBarController(this);
+        addLogController.setLog(selectedLog);
+        addLogController.setComboBoxElements();
+        addLogController.setButtonAction();
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+
+        stage.show();
+    }
     public void saveLog(Log log) {
         logBarViewModel.saveLog(log);
     }

@@ -5,7 +5,6 @@
 
 <?import javafx.geometry.Insets?>
 <VBox
-
         xmlns:fx="http://javafx.com/fxml"
         fx:controller="at.fhtw.routplanner.controller.LogBarController">
 <HBox prefHeight="32.0" prefWidth="453.0">
