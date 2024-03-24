@@ -20,8 +20,8 @@ public class RoutBarViewModel {
 
         logList.add(log1);
         Tour tour1 = new Tour("2323231","Test","test","start","end", TransportType.Bike,3.4f,2.3f,"test",logList);
-        Tour tour2 = new Tour("6776","Test2","test","start","end", TransportType.Bike,3.4f,2.3f,"test",null);
-        Tour tour3 = new Tour("wadwad","Test3","test","start","end", TransportType.Bike,3.4f,2.3f,"test",null);
+        Tour tour2 = new Tour("6776","Test2","tesfwfwt","fwaf","wad", TransportType.FootWalk,3.4f,2.3f,"test",null);
+        Tour tour3 = new Tour("wadwad","Test3","wad","war","awdwa", TransportType.MountainBike,3.4f,2.3f,"test",null);
 
         tours.add(tour1);
         tours.add(tour2);

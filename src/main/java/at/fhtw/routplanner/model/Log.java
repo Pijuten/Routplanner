@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 public class Log {
+
     private String id;
     private LocalDate date;
     private String comment;
