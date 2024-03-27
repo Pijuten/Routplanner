@@ -3,9 +3,12 @@ package at.fhtw.routplanner.viewModel;
 import at.fhtw.routplanner.EventListener;
 import at.fhtw.routplanner.UpdateTourListener;
 import at.fhtw.routplanner.model.Tour;
+import at.fhtw.routplanner.openstreet.CalcTile;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import lombok.Getter;
+
+import java.util.Vector;
 
 public class OverviewViewModel implements UpdateTourListener {
     @Getter
@@ -24,6 +27,8 @@ public class OverviewViewModel implements UpdateTourListener {
     private final StringProperty currentDistance = new SimpleStringProperty("");
     @Getter
     private final StringProperty currentTime = new SimpleStringProperty("");
+    @Getter
+    private final  StringProperty mapUrl = new SimpleStringProperty("");
     public  OverviewViewModel(){
         EventListener.getInstance().register(this);
     }
@@ -37,5 +42,8 @@ public class OverviewViewModel implements UpdateTourListener {
         currentTransportType.set(tour.getTransportType().toString());
         currentDistance.set(tour.getDistance().toString()+" km");
         currentTime.set(tour.getTime().toString()+" h");
+        Integer zoomLevel = CalcTile.getZoom(tour.getLatStartPoint(),tour.getLongStartPoint(),tour.getLatEndPoint(),tour.getLongEndPoint());
+        Vector<Integer> Tiles = CalcTile.getTileNumber(tour.getLatStartPoint(),tour.getLongStartPoint(),zoomLevel);
+        mapUrl.set("https://tile.openstreetmap.org/"+zoomLevel+"/"+Tiles.get(0)+"/"+Tiles.get(1)+".png");
     }
 }

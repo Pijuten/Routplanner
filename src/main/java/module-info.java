@@ -1,5 +1,6 @@
 module at.fhtw.routplanner {
     requires javafx.controls;
+    requires javafx.web;
     requires javafx.fxml;
     requires lombok;
 

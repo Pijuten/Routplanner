@@ -18,8 +18,12 @@ public class Main extends Application {
 
         // Set the scene on the stage
         stage.setScene(scene);
+        stage.sizeToScene();
         stage.setWidth(800); // Width of the window
         stage.setHeight(600); // Height of the window
+
+        stage.setMinWidth(stage.getWidth());
+        stage.setMinHeight(stage.getHeight());
         // Set the title of the stage
         stage.setTitle("Routplanner");
         // Show the stage

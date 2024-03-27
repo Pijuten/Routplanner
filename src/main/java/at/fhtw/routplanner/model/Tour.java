@@ -15,7 +15,11 @@ public class Tour {
     private String tourName;
     private String description;
     private String startPoint;
+    private Double latStartPoint;
+    private Double longStartPoint;
     private String endPoint;
+    private Double latEndPoint;
+    private Double longEndPoint;
     private TransportType transportType;
     private Float distance;
     private Float time;

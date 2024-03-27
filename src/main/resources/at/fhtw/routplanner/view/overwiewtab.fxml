@@ -1,83 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.web.WebView?>
 <TabPane prefHeight="500.0" prefWidth="453.0" tabClosingPolicy="UNAVAILABLE"
          xmlns:fx="http://javafx.com/fxml"
          fx:controller="at.fhtw.routplanner.controller.OverviewController"
 >
     <Tab text="%overviewTab.general">
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
-            <VBox layoutX="104.0" layoutY="25.0" prefHeight="210.0" prefWidth="333.0">
-                <HBox prefHeight="30.0" prefWidth="333.0">
-                    <Label text="%overviewTab.tourName">
-                        <HBox.margin>
-                            <Insets right="5.0"/>
-                        </HBox.margin>
-                    </Label>
-                    <Label fx:id="nameLabel" text="Label"/>
-                </HBox>
-                <HBox prefHeight="30.0" prefWidth="333.0">
-                    <Label text="%overviewTab.description">
-                        <HBox.margin>
-                            <Insets right="5.0"/>
-                        </HBox.margin>
-                    </Label>
-                    <Label fx:id="descriptionLabel" text="Label"/>
-                </HBox>
-                <HBox prefHeight="30.0" prefWidth="333.0">
-                    <Label text="%overviewTab.startPoint">
-                        <HBox.margin>
-                            <Insets right="5.0"/>
-                        </HBox.margin>
-                    </Label>
-                    <Label fx:id="startPointLabel" text="Label"/>
-                </HBox>
-                <HBox prefHeight="30.0" prefWidth="333.0">
-                    <Label text="%overviewTab.endPoint">
-                        <HBox.margin>
-                            <Insets right="5.0"/>
-                        </HBox.margin>
-                    </Label>
-                    <Label fx:id="endPointLabel" text="Label"/>
-                </HBox>
-                <HBox prefHeight="30.0" prefWidth="333.0">
-                    <Label text="%overviewTab.transportType">
-                        <HBox.margin>
-                            <Insets right="5.0"/>
-                        </HBox.margin>
-                    </Label>
-                    <Label fx:id="transportTypeLabel" text="Label"/>
-                </HBox>
-                <HBox prefHeight="30.0" prefWidth="333.0">
-                    <Label text="%overviewTab.tourDistance">
-                        <HBox.margin>
-                            <Insets right="5.0"/>
-                        </HBox.margin>
-                    </Label>
-                    <Label fx:id="distanceLabel" text="Label"/>
-                </HBox>
-                <HBox prefHeight="30.0" prefWidth="333.0">
-                    <Label text="%overviewTab.time">
-                        <HBox.margin>
-                            <Insets right="5.0"/>
-                        </HBox.margin>
-                    </Label>
-                    <Label fx:id="timeLabel" text="Label"/>
-                </HBox>
-            </VBox>
+            <BorderPane layoutX="4.0" layoutY="6.0" prefHeight="235.0" prefWidth="537.0" AnchorPane.bottomAnchor="0.0"
+                        AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0">
+                <center>
+                    <VBox layoutX="104.0" layoutY="25.0" prefHeight="210.0" prefWidth="333.0">
+                        <HBox prefHeight="30.0" prefWidth="333.0">
+                            <Label text="%overviewTab.tourName">
+                                <HBox.margin>
+                                    <Insets right="5.0"/>
+                                </HBox.margin>
+                            </Label>
+                            <Label fx:id="nameLabel" text="Label"/>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="333.0">
+                            <Label text="%overviewTab.description">
+                                <HBox.margin>
+                                    <Insets right="5.0"/>
+                                </HBox.margin>
+                            </Label>
+                            <Label fx:id="descriptionLabel" text="Label"/>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="333.0">
+                            <Label text="%overviewTab.startPoint">
+                                <HBox.margin>
+                                    <Insets right="5.0"/>
+                                </HBox.margin>
+                            </Label>
+                            <Label fx:id="startPointLabel" text="Label"/>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="333.0">
+                            <Label text="%overviewTab.endPoint">
+                                <HBox.margin>
+                                    <Insets right="5.0"/>
+                                </HBox.margin>
+                            </Label>
+                            <Label fx:id="endPointLabel" text="Label"/>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="333.0">
+                            <Label text="%overviewTab.transportType">
+                                <HBox.margin>
+                                    <Insets right="5.0"/>
+                                </HBox.margin>
+                            </Label>
+                            <Label fx:id="transportTypeLabel" text="Label"/>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="333.0">
+                            <Label text="%overviewTab.tourDistance">
+                                <HBox.margin>
+                                    <Insets right="5.0"/>
+                                </HBox.margin>
+                            </Label>
+                            <Label fx:id="distanceLabel" text="Label"/>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="333.0">
+                            <Label text="%overviewTab.time">
+                                <HBox.margin>
+                                    <Insets right="5.0"/>
+                                </HBox.margin>
+                            </Label>
+                            <Label fx:id="timeLabel" text="Label"/>
+                        </HBox>
+                    </VBox>
+                </center>
+            </BorderPane>
         </AnchorPane>
     </Tab>
     <Tab text="%overviewTab.rout">
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
-            <VBox alignment="CENTER" layoutX="84.0" layoutY="42.0" prefHeight="200.0" prefWidth="372.0">
-                <Hyperlink alignment="TOP_LEFT" text="Hyperlink"/>
-            </VBox>
+            <BorderPane prefHeight="240.0" prefWidth="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                        AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <center>
+                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="372.0" BorderPane.alignment="CENTER">
+                        <WebView fx:id="hyperlink" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </center>
+            </BorderPane>
         </AnchorPane>
     </Tab>
-    <Tab text="%overviewTab.misc" />
+    <Tab text="%overviewTab.misc"/>
 </TabPane>
