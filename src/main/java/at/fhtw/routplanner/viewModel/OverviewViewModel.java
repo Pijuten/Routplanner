@@ -1,6 +1,6 @@
 package at.fhtw.routplanner.viewModel;
 
-import at.fhtw.routplanner.EventListener;
+import at.fhtw.routplanner.ObserverSelectedTour;
 import at.fhtw.routplanner.UpdateTourListener;
 import at.fhtw.routplanner.model.Tour;
 import at.fhtw.routplanner.openstreet.CalcTile;
@@ -30,7 +30,7 @@ public class OverviewViewModel implements UpdateTourListener {
     @Getter
     private final  StringProperty mapUrl = new SimpleStringProperty("");
     public  OverviewViewModel(){
-        EventListener.getInstance().register(this);
+        ObserverSelectedTour.getInstance().register(this);
     }
     @Override
     public void updateTour(Tour selectedTour) {

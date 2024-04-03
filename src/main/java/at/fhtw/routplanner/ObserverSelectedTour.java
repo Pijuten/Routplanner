@@ -5,12 +5,12 @@ import at.fhtw.routplanner.model.Tour;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventListener {
+public class ObserverSelectedTour {
     private List<UpdateTourListener> updateTourListeners = new ArrayList<>();
-    private static EventListener INSTANCE;
-    public static EventListener getInstance(){
+    private static ObserverSelectedTour INSTANCE;
+    public static ObserverSelectedTour getInstance(){
         if(INSTANCE==null)
-            INSTANCE =  new EventListener();
+            INSTANCE =  new ObserverSelectedTour();
         return INSTANCE;
     }
     public void updateSelectedTour(Tour selectedTour){

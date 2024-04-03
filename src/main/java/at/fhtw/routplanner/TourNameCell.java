@@ -12,7 +12,7 @@ public class TourNameCell extends ListCell<Tour> {
         }else{
             setText(tour.getTourName());
             setOnMouseClicked(event ->{
-                EventListener.getInstance().updateSelectedTour(tour);
+                ObserverSelectedTour.getInstance().updateSelectedTour(tour);
             });
         }
     }

@@ -3,6 +3,7 @@ module at.fhtw.routplanner {
     requires javafx.web;
     requires javafx.fxml;
     requires lombok;
+    requires log4j;
 
     opens at.fhtw.routplanner to javafx.fxml;
     opens at.fhtw.routplanner.controller to javafx.fxml;

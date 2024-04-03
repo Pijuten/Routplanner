@@ -12,15 +12,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import lombok.extern.log4j.Log4j;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+@Log4j
 public class RoutBarController implements Initializable {
     final RoutBarViewModel routBarViewModel;
-    public ListView tourListView;
+    public ListView<Tour> tourListView;
     public Button removeButton;
     public Button addButton;
     public Button editButton;
@@ -49,7 +51,7 @@ public class RoutBarController implements Initializable {
                 String id = selectedTour.getId();
                 routBarViewModel.removeTour(id);
             } else {
-                System.out.println("No item selected.");
+                log.info("No item selected.");
             }
         });
     }
@@ -65,7 +67,7 @@ public class RoutBarController implements Initializable {
         editButton.setOnAction(event -> {
             Tour selectedTour = (Tour) tourListView.getSelectionModel().getSelectedItem();
             if (selectedTour == null) {
-                System.out.println("No item selected.");
+                log.info("No item selected.");
                 return;
             }
             setupStage(selectedTour);

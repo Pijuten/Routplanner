@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.Locale;
 
@@ -13,20 +15,24 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
+        showStage(stage);
+    }
+    public static Parent showStage(Stage primaryStage) throws Exception{
         Parent root = FXMLDependencyInjection.load("main.fxml", Locale.GERMAN);
         Scene scene = new Scene(root);
 
         // Set the scene on the stage
-        stage.setScene(scene);
-        stage.sizeToScene();
-        stage.setWidth(800); // Width of the window
-        stage.setHeight(600); // Height of the window
+        primaryStage.setScene(scene);
+        primaryStage.sizeToScene();
+        primaryStage.setWidth(800); // Width of the window
+        primaryStage.setHeight(600); // Height of the window
 
-        stage.setMinWidth(stage.getWidth());
-        stage.setMinHeight(stage.getHeight());
+        primaryStage.setMinWidth(primaryStage.getWidth());
+        primaryStage.setMinHeight(primaryStage.getHeight());
         // Set the title of the stage
-        stage.setTitle("Routplanner");
+        primaryStage.setTitle("Routplanner");
         // Show the stage
-        stage.show();
+        primaryStage.show();
+        return root;
     }
 }
