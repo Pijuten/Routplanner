@@ -4,6 +4,7 @@ import at.fhtw.routplanner.FXMLDependencyInjection;
 import at.fhtw.routplanner.TourNameCell;
 import at.fhtw.routplanner.model.Tour;
 import at.fhtw.routplanner.viewModel.RoutBarViewModel;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -40,6 +41,12 @@ public class RoutBarController implements Initializable {
         removeButtonListener(removeButton);
         addButtonListener(addButton);
         editButtonListener(editButton);
+        editButton.setDisable(true);
+        removeButton.setDisable(true);
+        tourListView.getSelectionModel().getSelectedItems().addListener((ListChangeListener<? super Tour>) change -> {
+            editButton.setDisable(tourListView.getSelectionModel().getSelectedItems().isEmpty());
+            removeButton.setDisable(tourListView.getSelectionModel().getSelectedItems().isEmpty());
+        } );
     }
 
 

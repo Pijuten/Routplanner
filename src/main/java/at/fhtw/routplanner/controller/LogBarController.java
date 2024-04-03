@@ -44,7 +44,13 @@ public class LogBarController implements Initializable {
         tableView.setItems(logBarViewModel.getData());
         logBarViewModel.setSelectedItems(tableView.getSelectionModel().getSelectedItems());
         editButton.setDisable(true);
-        logBarViewModel.getSelectedItems().addListener((ListChangeListener<Log>) change -> editButton.setDisable(logBarViewModel.getSelectedItems().isEmpty()));
+        removeButton.setDisable(true);
+        logBarViewModel.getSelectedItems().addListener((ListChangeListener<Log>) change -> {
+            editButton.setDisable(logBarViewModel.getSelectedItems().isEmpty());
+            removeButton.setDisable(logBarViewModel.getSelectedItems().isEmpty());
+        });
+
+
 
         removeButtonListener(removeButton);
         addButtonListener(addButton);
