@@ -10,12 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.Setter;
-import lombok.extern.log4j.Log4j;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-@Log4j
+
 public class AddLogController implements Initializable {
     public Button saveButton;
     public Button cancelButton;
@@ -36,7 +35,7 @@ public class AddLogController implements Initializable {
     @Setter
     private Stage stage;
     @Setter
-    Log logInstance;
+    Log log;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -46,19 +45,19 @@ public class AddLogController implements Initializable {
     }
 
     public void setComboBoxElements() {
-        if (logInstance != null) {
-            datePicker.valueProperty().bindBidirectional(new SimpleObjectProperty<>(logInstance.getDate()));
-            commentTextField.textProperty().bindBidirectional(new SimpleStringProperty(logInstance.getComment()));
-            difficultyTextField.textProperty().bindBidirectional(new SimpleStringProperty(logInstance.getDifficulty().toString()));
-            distanceTextField.textProperty().bindBidirectional(new SimpleStringProperty(logInstance.getDistance().toString()));
-            timeTextField.textProperty().bindBidirectional(new SimpleStringProperty(logInstance.getTimeLength().toString()));
-            ratingTextField.textProperty().bindBidirectional(new SimpleStringProperty(logInstance.getRating().toString()));
+        if (log != null) {
+            datePicker.valueProperty().bindBidirectional(new SimpleObjectProperty<>(log.getDate()));
+            commentTextField.textProperty().bindBidirectional(new SimpleStringProperty(log.getComment()));
+            difficultyTextField.textProperty().bindBidirectional(new SimpleStringProperty(log.getDifficulty().toString()));
+            distanceTextField.textProperty().bindBidirectional(new SimpleStringProperty(log.getDistance().toString()));
+            timeTextField.textProperty().bindBidirectional(new SimpleStringProperty(log.getTimeLength().toString()));
+            ratingTextField.textProperty().bindBidirectional(new SimpleStringProperty(log.getRating().toString()));
         }
     }
 
 
     public void setButtonAction() {
-        if (logInstance == null) {
+        if (log == null) {
             saveButton.setOnAction(actionEvent -> saveLog());
         } else {
             saveButton.setOnAction(actionEvent -> editLog());
@@ -80,13 +79,13 @@ public class AddLogController implements Initializable {
         if (!checkInput()) {
             return;
         }
-        logInstance.setDate(datePicker.getValue());
-        logInstance.setComment(commentTextField.getText());
-        logInstance.setDifficulty(Integer.parseInt(difficultyTextField.getText()));
-        logInstance.setDistance(Float.parseFloat(distanceTextField.getText()));
-        logInstance.setTimeLength(Float.parseFloat(timeTextField.getText()));
-        logInstance.setRating(Integer.parseInt(ratingTextField.getText()));
-        logBarController.editLog(logInstance);
+        log.setDate(datePicker.getValue());
+        log.setComment(commentTextField.getText());
+        log.setDifficulty(Integer.parseInt(difficultyTextField.getText()));
+        log.setDistance(Float.parseFloat(distanceTextField.getText()));
+        log.setTimeLength(Float.parseFloat(timeTextField.getText()));
+        log.setRating(Integer.parseInt(ratingTextField.getText()));
+        logBarController.editLog(log);
 
         stage.close();
     }
@@ -103,6 +102,7 @@ public class AddLogController implements Initializable {
             return false;
         } else if (distanceTextField.getText().isEmpty() || !distanceTextField.getText().matches("^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$")) {
             distanceErrorLabel.setVisible(true);
+            System.out.println("no dis");
             return false;
         } else if (timeTextField.getText().isEmpty() || !timeTextField.getText().matches("^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$")) {
             timeErrorLabel.setVisible(true);
