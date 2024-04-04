@@ -106,7 +106,7 @@ public class LogBarController implements Initializable {
         AddLogController addLogController = loader.getController();
         addLogController.setStage(stage);
         addLogController.setLogBarController(this);
-        addLogController.setLogInstance(selectedLog);
+        addLogController.setLog(selectedLog);
         addLogController.setComboBoxElements();
         addLogController.setButtonAction();
 
