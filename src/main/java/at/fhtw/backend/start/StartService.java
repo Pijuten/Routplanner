@@ -13,7 +13,16 @@ public class StartService {
     public StartService(TourRepository tourRepository) {
         this.tourRepository = tourRepository;
     }
-    public List<Log> fetchTours(){
+
+    public List<Log> fetchTours() {
         return tourRepository.findAll();
     }
+
+    public void addTour(Log log) {
+        tourRepository.save(log);
+    }
+    public void removeTour(Long logId) {
+        tourRepository.deleteById(logId);
+    }
+
 }

@@ -4,8 +4,10 @@ import at.fhtw.backend.model.Log;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -17,8 +19,8 @@ public class StartController {
         this.startService = startService;
     }
 
-    @PostMapping(value = "/",produces = MediaType.APPLICATION_JSON_VALUE)
-    public String start() {
+    @GetMapping(value = "/tour/get",produces = MediaType.APPLICATION_JSON_VALUE)
+    public String fetchLogs() {
         List<Log> logList = startService.fetchTours();
         ObjectMapper mapper = new ObjectMapper();
 
@@ -30,5 +32,13 @@ public class StartController {
             e.printStackTrace();
         }
         return jsonString;
+    }
+    @PostMapping(value = "/tour/add")
+    public void addLog(@RequestBody Log log) {
+        startService.addTour(log);
+    }
+    @DeleteMapping(value = "/tour/remove")
+    public void removeLog(@RequestBody Long logId) {
+        startService.removeTour(logId);
     }
 }
