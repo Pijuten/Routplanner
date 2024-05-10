@@ -1,4 +1,4 @@
-package at.fhtw.backend.start;
+package at.fhtw.backend.service.Start;
 
 import at.fhtw.backend.model.Log;
 import com.fasterxml.jackson.databind.ObjectMapper;
