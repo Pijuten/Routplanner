@@ -1,10 +1,10 @@
 package at.fhtw.backend.repository;
 
-import at.fhtw.backend.model.Log;
+import at.fhtw.backend.model.Tour;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface  TourRepository extends JpaRepository<Log,Long> {
+public interface  TourRepository extends JpaRepository<Tour,Long> {
 
 }

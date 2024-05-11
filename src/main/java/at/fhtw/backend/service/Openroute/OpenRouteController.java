@@ -1,6 +1,6 @@
 package at.fhtw.backend.service.Openroute;
 
-import at.fhtw.backend.model.OpenRoute.Direction.Geometry;
+import at.fhtw.backend.model.OpenRoute.Direction.Direction;
 import at.fhtw.backend.model.OpenRoute.Geocode.Feature;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +17,12 @@ public class OpenRouteController {
     }
 
     @GetMapping("/route/geocode")
-    public List<Feature> getGeocode(@RequestBody String locationName) {
-        return openRouteService.getGeocode(locationName);
+    public List<Feature> GetGeocode(@RequestBody String locationName) {
+        return openRouteService.GetGeocode(locationName);
     }
     @GetMapping("/route/direction")
-    public Geometry getDirection(@RequestBody List<Double> directions) {
-        return openRouteService.getCoordinate(directions);
+    public Direction GetDirection(@RequestBody List<Double> directions) {
+        return openRouteService.GetDirections(directions);
+
     }
 }

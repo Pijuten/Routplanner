@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Getter @Setter
-public class Feature {
-    private Geometry geometry;
-    private Properties properties;
+@Getter
+@Setter
+public class Properties {
+    private List<Segments> segments;
 }
