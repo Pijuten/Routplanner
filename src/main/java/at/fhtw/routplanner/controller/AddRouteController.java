@@ -73,7 +73,7 @@ public class AddRouteController implements Initializable {
         if(!checkInput()){
             return;
         }
-        Tour tour = new Tour("we221e",tourNameTextField.getText(),descriptionTextField.getText(),startPointTextField.getText(),48.1787951,15.2300914,endpointTextField.getText(),47.2046171,11.0819367,TransportType.fromDisplayName(vehicleComboBox.getValue()),43.3f,23.f,"test",null);
+        Tour tour = new Tour(tourNameTextField.getText(),descriptionTextField.getText(),startPointTextField.getText(),48.1787951,15.2300914,endpointTextField.getText(),47.2046171,11.0819367,TransportType.fromDisplayName(vehicleComboBox.getValue()),43.3,23.f,"test",null);
         routBarController.saveTour(tour);
         closeStage();
     }

@@ -4,7 +4,6 @@ import at.fhtw.routplanner.ObserverSelectedTour;
 import at.fhtw.routplanner.UpdateTourListener;
 import at.fhtw.routplanner.model.Log;
 import at.fhtw.routplanner.model.Tour;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
@@ -30,9 +29,9 @@ public class LogBarViewModel implements UpdateTourListener {
     @Override
     public void updateTour(Tour selectedTour) {
         tour = selectedTour;
-        if(selectedTour.getLogs()!=null){
+        if(selectedTour.getLog()!=null){
         data.clear();
-        data.addAll(selectedTour.getLogs());
+        data.addAll(selectedTour.getLog());
         }else{
             data.clear();
         }
@@ -52,8 +51,8 @@ public class LogBarViewModel implements UpdateTourListener {
     }
 
     public void saveLog(Log log) {
-        if(tour.getLogs()==null)
-            tour.setLogs(
+        if(tour.getLog()==null)
+            tour.setLog(
                     new ArrayList<Log>()
             );
         data.add(log);

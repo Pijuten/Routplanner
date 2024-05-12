@@ -53,9 +53,9 @@ public class RoutBarController implements Initializable {
 
     private void removeButtonListener(Button removeButton) {
         removeButton.setOnAction(event -> {
-            Tour selectedTour = (Tour) tourListView.getSelectionModel().getSelectedItem();
+            Tour selectedTour = tourListView.getSelectionModel().getSelectedItem();
             if (selectedTour != null) {
-                String id = selectedTour.getId();
+                Long id = selectedTour.getTour();
                 routBarViewModel.removeTour(id);
             } else {
                 log.info("No item selected.");
@@ -72,7 +72,7 @@ public class RoutBarController implements Initializable {
     private void editButtonListener(Button editButton) {
 
         editButton.setOnAction(event -> {
-            Tour selectedTour = (Tour) tourListView.getSelectionModel().getSelectedItem();
+            Tour selectedTour = tourListView.getSelectionModel().getSelectedItem();
             if (selectedTour == null) {
                 log.info("No item selected.");
                 return;

@@ -7,11 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class Tour {
-    private String id;
+    private Long tour;
     private String tourName;
     private String description;
     private String startPoint;
@@ -21,14 +22,27 @@ public class Tour {
     private Double latEndPoint;
     private Double longEndPoint;
     private TransportType transportType;
-    private Float distance;
+    private Double distance;
     private Float time;
     private String information;
-    private List<Log> logs;
+    private List<Log> log;
     //tour description, from, to, transport type, tour distance, estimated time, route information
-
-    public void addLog(Log log) {
-        this.logs.add(log);
+    public Tour(String tourName,String description, String startPoint, Double latStartPoint, Double longStartPoint, String endPoint, Double latEndPoint, Double longEndPoint, TransportType transportType,Double distance, Float time, String information,List<Log> log) {
+        this.tourName = tourName;
+        this.description = description;
+        this.startPoint = startPoint;
+        this.latStartPoint = latStartPoint;
+        this.longStartPoint = longStartPoint;
+        this.endPoint = endPoint;
+        this.latEndPoint = latEndPoint;
+        this.longEndPoint = longEndPoint;
+        this.transportType = transportType;
+        this.distance = distance;
+        this.time = time;
+        this.information = information;
+        this.log = log;
     }
-
+    public void addLog(Log log) {
+        this.log.add(log);
+    }
 }
