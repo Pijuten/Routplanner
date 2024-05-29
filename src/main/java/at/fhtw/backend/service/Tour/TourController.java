@@ -26,7 +26,7 @@ public class TourController {
        return ResponseEntity.ok(startService.addTour(tour));
     }
     @DeleteMapping(value = "/tour/remove")
-    public void removeLog(@RequestParam Long logId) {
-        startService.removeTour(logId);
+    public void removeLog(@RequestParam Long tourId) {
+        startService.removeTour(tourId);
     }
 }
