@@ -2,10 +2,10 @@ package at.fhtw.routplanner.controller;
 
 import at.fhtw.routplanner.viewModel.OverviewViewModel;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.web.WebView;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,6 +19,7 @@ public class OverviewController implements Initializable {
     public Label distanceLabel;
     public Label timeLabel;
     public WebView hyperlink;
+    public Button createReport;
 
     public OverviewController(OverviewViewModel overviewViewModel) {
         this.overviewViewModel = overviewViewModel;
@@ -39,7 +40,7 @@ public class OverviewController implements Initializable {
         overviewViewModel.getMapUrl().addListener((observable, oldValue, newValue) -> {
             hyperlink.getEngine().load(newValue);
         });
-
+        createReport.setOnAction(event -> overviewViewModel.createReport());
     }
 
 }

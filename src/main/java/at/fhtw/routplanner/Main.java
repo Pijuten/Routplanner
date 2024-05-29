@@ -12,7 +12,7 @@ public class Main extends Application {
     private static final Logger log = Logger.getLogger(Main.class);
 
     public static void main(String[] args){
-        launch(args);
+        launch(Main.class, args);
     }
 
     @Override

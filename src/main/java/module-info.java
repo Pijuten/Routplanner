@@ -7,10 +7,8 @@ module at.fhtw.routplanner {
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.datatype.jsr310;
 
-
-    opens at.fhtw.routplanner to javafx.fxml;
-    opens at.fhtw.routplanner.controller to javafx.fxml;
-
+    opens at.fhtw.routplanner;
+    opens at.fhtw.routplanner.controller;
     opens at.fhtw.routplanner.model;
     exports at.fhtw.routplanner;
     exports at.fhtw.routplanner.model;
