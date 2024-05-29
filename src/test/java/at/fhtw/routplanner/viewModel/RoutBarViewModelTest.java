@@ -4,16 +4,22 @@ import at.fhtw.routplanner.enums.TransportType;
 import at.fhtw.routplanner.model.Tour;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class RoutBarViewModelTest {
 
     @Test
-    void saveDataToRoutList_shouldAddData(){
-        RoutBarViewModel routBarViewModel = new RoutBarViewModel();
-        var lastDataCount = routBarViewModel.getTours().size();
-        Tour tour = new Tour("23","23","","2e",23.2,23.2,"",233.42,233., TransportType.Bike,23.3f,232.3f,"32",null);
-        routBarViewModel.addTour(tour);
-        assertEquals(++lastDataCount,routBarViewModel.getTours().size());
+    void getDirections() throws ExecutionException, InterruptedException {
+        RoutBarViewModel viewModel = new RoutBarViewModel();
+        List<Double> list = new ArrayList<>();
+        list.add(8.681495);
+        list.add(49.41461);
+        list.add(8.687872);
+        list.add(49.420318);
+        viewModel.getDirection(list).get();
     }
 }

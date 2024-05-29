@@ -1,32 +1,49 @@
 package at.fhtw.routplanner.viewModel;
 
-import at.fhtw.routplanner.enums.TransportType;
-import at.fhtw.routplanner.model.Log;
+import at.fhtw.routplanner.JsonHttpClient;
+import at.fhtw.routplanner.Main;
+import at.fhtw.routplanner.model.OpenRoute.Direction.Direction;
+import at.fhtw.routplanner.model.OpenRoute.Geocode.Geocoding;
 import at.fhtw.routplanner.model.Tour;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 public class RoutBarViewModel {
 
     public RoutBarViewModel(){
-        List<Log> logList = new ArrayList<>();
-        Log log1 = new Log("1", LocalDate.now(), "test" ,123, 3, 10.5f, 1.5f, 5);
+        try(JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
+            CompletableFuture<String> listCompletableFuture = jsonHttpClient.sendRequestAsync(null, "http://localhost:8080/tour/get", JsonHttpClient.Method.GET);
+            listCompletableFuture.thenAcceptAsync(list -> {
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.registerModule(new JavaTimeModule());
+                try {
+                    List<Tour> tours1 = objectMapper.readValue(list, new TypeReference<List<Tour>>() {
+                    });
 
+                    tours.addAll(tours1);
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
+            }).exceptionally(ex -> {
+                // Handle exceptions if CompletableFuture completes exceptionally
+                ex.printStackTrace();
+                return null; // Return a default value or handle the exception as needed
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
-        logList.add(log1);
-        Tour tour1 = new Tour("Test","test","start",48.1787951,15.2300914,"end",47.2046171,11.0819367, TransportType.Bike,3.4,2.3f,"test",logList);
-        Tour tour2 = new Tour("Test2","tesfwfwt","fwaf",47.8895155,1.4955935,"wad",46.6738053,1.5478237, TransportType.FootWalk,3.4,2.3f,"test",null);
-        Tour tour3 = new Tour("Test3","wad","war",-9.4307488,-76.410938,"awdwa",-16.1501735,-73.1948006, TransportType.MountainBike,3.4,2.3f,"test",null);
-
-        tours.add(tour1);
-        tours.add(tour2);
-        tours.add(tour3);
     }
     private ObservableList<Tour> tours = FXCollections.observableArrayList();
 
@@ -34,21 +51,78 @@ public class RoutBarViewModel {
         return tours;
     }
     public void addTour(Tour tour){
-        tours.add(tour);
+        try(JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
+            CompletableFuture<String> tourFuture = jsonHttpClient.sendRequestAsync(tour, "http://localhost:8080/tour/add", JsonHttpClient.Method.POST);
+            tourFuture.thenAcceptAsync(tourResponse -> {
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.registerModule(new JavaTimeModule());
+                try {
+                    Tour responseTour = objectMapper.readValue(tourResponse,Tour.class);
+                    tour.setTourId(responseTour.getTourId());
+                    Platform.runLater(() -> tours.add(tour));
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
+            }).exceptionally(ex -> {
+                // Handle exceptions if CompletableFuture completes exceptionally
+                ex.printStackTrace();
+                return null;
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public void removeTour(Long id){
-
         for (Iterator<Tour> iterator = tours.iterator(); iterator.hasNext();) {
             Tour item = iterator.next();
-            if (Objects.equals(item.getTour(), id)) {
+            if (Objects.equals(item.getTourId(), id)) {
                 iterator.remove();
                 break;
             }
         }
+
+        try(JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
+            jsonHttpClient.sendRequestAsync(null, "http://localhost:8080/tour/remove?logId="+id, JsonHttpClient.Method.DELETE);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public void selectTour(){
     }
+    private Direction direction;
+    public CompletableFuture<Direction> getDirection(List<Double> coordinates) {
+        CompletableFuture<Direction> future = new CompletableFuture<>();
 
+        try (JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
+            CompletableFuture<String> tourFuture = jsonHttpClient.sendRequestAsync(coordinates, "http://localhost:8080/route/direction", JsonHttpClient.Method.POST);
+
+            tourFuture.thenAcceptAsync(tourResponse -> {
+                System.out.println(tourResponse);
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.registerModule(new JavaTimeModule());
+                try {
+                    Direction direction = objectMapper.readValue(tourResponse, Direction.class);
+                    future.complete(direction);
+                } catch (JsonProcessingException e) {
+                    future.completeExceptionally(e);
+                }
+            }).exceptionally(ex -> {
+                // Handle exceptions if CompletableFuture completes exceptionally
+                ex.printStackTrace();
+                future.completeExceptionally(ex);
+                return null;
+            });
+        } catch (IOException e) {
+            future.completeExceptionally(e);
+        }
+
+        return future;
+    }
     public void editTour(Tour tour) {
+        try(JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
+            jsonHttpClient.sendRequestAsync(tour, "http://localhost:8080/tour/add", JsonHttpClient.Method.POST);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

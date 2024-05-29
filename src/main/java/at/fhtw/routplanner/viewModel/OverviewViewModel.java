@@ -40,10 +40,8 @@ public class OverviewViewModel implements UpdateTourListener {
         currentStartPoint.set(tour.getStartPoint());
         currentEndpoint.set(tour.getEndPoint());
         currentTransportType.set(tour.getTransportType().toString());
-        currentDistance.set(tour.getDistance().toString()+" km");
-        currentTime.set(tour.getTime().toString()+" h");
+        currentDistance.set(tour.getDistance().toString()+" m");
+        currentTime.set(Math.round((tour.getTime()/60)) +" min");
         Integer zoomLevel = CalcTile.getZoom(tour.getLatStartPoint(),tour.getLongStartPoint(),tour.getLatEndPoint(),tour.getLongEndPoint());
-        Vector<Integer> Tiles = CalcTile.getTileNumber(tour.getLatStartPoint(),tour.getLongStartPoint(),zoomLevel);
-        mapUrl.set("https://tile.openstreetmap.org/"+zoomLevel+"/"+Tiles.get(0)+"/"+Tiles.get(1)+".png");
     }
 }

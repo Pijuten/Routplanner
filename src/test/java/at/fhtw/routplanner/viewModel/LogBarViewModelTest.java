@@ -17,7 +17,7 @@ class LogBarViewModelTest {
         LogBarViewModel logBarViewModel = new LogBarViewModel();
         ObserverSelectedTour.getInstance().updateSelectedTour(routBarViewModel.getTours().get(0));
         var lastDataCount = logBarViewModel.getData().size();
-        Log log = new Log("23", LocalDate.now(), "dwadwa", 32, 4, 2f, 23f, 2);
+        Log log = new Log(23L, LocalDate.now(), "dwadwa", 32, 4, 2.4, 23.3, 2);
         logBarViewModel.saveLog(log);
         assertEquals(++lastDataCount,logBarViewModel.getData().size());
     }

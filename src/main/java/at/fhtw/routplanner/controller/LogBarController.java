@@ -61,9 +61,9 @@ public class LogBarController implements Initializable {
         removeButton.setOnAction(event -> {
             Log selectedLog = (Log) tableView.getSelectionModel().getSelectedItem();
             if (selectedLog != null) {
-                String id = selectedLog.getId();
+                Long id = selectedLog.getLogId();
                 log.info("Selected Log ID: " + id);
-                logBarViewModel.removeLog(id);
+                logBarViewModel.removeLog(selectedLog);
             } else {
                 log.info("No item selected.");
             }

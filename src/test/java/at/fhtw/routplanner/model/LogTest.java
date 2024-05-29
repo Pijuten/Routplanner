@@ -11,9 +11,9 @@ class LogTest {
     @Test
     public void testLogConstructorAndGetter() {
         LocalDate date = LocalDate.now();
-        Log log = new Log("1", date, "Test Comment", 123456789, 5, 12.5f, 3.5f, 10);
+        Log log = new Log(232L, date, "Test Comment", 123456789, 5, 12.5, 3.5, 10);
 
-        assertEquals("1", log.getId());
+        assertEquals("1", log.getLogId());
         assertEquals(date, log.getDate());
         assertEquals("Test Comment", log.getComment());
         assertEquals(Integer.valueOf(123456789), log.getTimeStamp());
@@ -26,17 +26,16 @@ class LogTest {
     @Test
     public void testLogEquals() {
         LocalDate date = LocalDate.now();
-        Log log1 = new Log("1", date, "Test Comment", 123456789, 5, 12.5f, 3.5f, 10);
-        Log log2 = new Log("1", date, "Test Comment", 123456789, 5, 12.5f, 3.5f, 10);
-
+        Log log1 = new Log(23L, date, "Test Comment", 123456789, 5, 12.5, 3.5, 10);
+        Log log2 = new Log(24L, date, "Test Comment", 123456789, 5, 12.5, 3.5, 10);
         assertEquals(log1, log2);
     }
 
     @Test
     public void testLogNotEquals() {
         LocalDate date = LocalDate.now();
-        Log log1 = new Log("1", date, "Test Comment", 123456789, 5, 12.5f, 3.5f, 10);
-        Log log2 = new Log("2", date, "Different Comment", 987654321, 3, 10.0f, 2.5f, 8);
+        Log log1 = new Log(23L, date, "Test Comment", 123456789, 5, 12.5, 3.5, 10);
+        Log log2 = new Log(32L, date, "Different Comment", 987654321, 3, 10.0, 2.5, 8);
 
         assertNotEquals(log1, log2);
     }
@@ -44,7 +43,7 @@ class LogTest {
     @Test
     public void testLogToString() {
         LocalDate date = LocalDate.of(2023, 4, 1);
-        Log log = new Log("1", date, "Test Comment", 123456789, 5, 12.5f, 3.5f, 10);
+        Log log = new Log(23L, date, "Test Comment", 123456789, 5, 12.5, 3.5, 10);
         String expectedToStringContains = "[id=1, date=2023-04-01, comment=Test Comment, timeStamp=123456789, difficulty=5, distance=12.5, timeLength=3.5, rating=10]";
 
         // Ensure the toString method contains some key identifiers; exact format can vary

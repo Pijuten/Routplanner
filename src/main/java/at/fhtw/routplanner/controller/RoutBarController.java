@@ -55,7 +55,7 @@ public class RoutBarController implements Initializable {
         removeButton.setOnAction(event -> {
             Tour selectedTour = tourListView.getSelectionModel().getSelectedItem();
             if (selectedTour != null) {
-                Long id = selectedTour.getTour();
+                Long id = selectedTour.getTourId();
                 routBarViewModel.removeTour(id);
             } else {
                 log.info("No item selected.");

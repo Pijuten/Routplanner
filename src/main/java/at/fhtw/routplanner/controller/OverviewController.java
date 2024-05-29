@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.web.WebView;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,7 +34,8 @@ public class OverviewController implements Initializable {
         distanceLabel.textProperty().bindBidirectional(overviewViewModel.getCurrentDistance());
         timeLabel.textProperty().bindBidirectional(overviewViewModel.getCurrentTime());
 
-        hyperlink.getEngine().load(overviewViewModel.getMapUrl().get());
+        String htmlFilePath = "/at/fhtw/routplanner/html/leaflet.html";
+        hyperlink.getEngine().load(getClass().getResource(htmlFilePath).toExternalForm());
         overviewViewModel.getMapUrl().addListener((observable, oldValue, newValue) -> {
             hyperlink.getEngine().load(newValue);
         });

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.Getter;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -13,10 +14,12 @@ public class Main extends Application {
     public static void main(String[] args){
         launch(args);
     }
+
     @Override
     public void start(Stage stage) throws Exception {
         showStage(stage);
     }
+
     public static Parent showStage(Stage primaryStage) throws Exception{
         Parent root = FXMLDependencyInjection.load("main.fxml", Locale.GERMAN);
         Scene scene = new Scene(root);
