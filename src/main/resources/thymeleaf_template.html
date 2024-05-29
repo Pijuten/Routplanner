@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body style="margin: 0;padding: 0;">
+<h1 style="text-align: center;" th:text="${title}"></h1>
+<div>
+    <p><strong>Description:</strong> <span th:text="${description}"></span></p>
+    <p><strong>Start Point:</strong> <span th:text="${start}"></span></p>
+    <p><strong>End Point:</strong> <span th:text="${end}"></span></p>
+    <p><strong>Distanz:</strong> <span th:text="${distance}"></span></p>
+    <p><strong>Dauer:</strong> <span th:text="${time}"></span></p>
+    <p><strong>Schwierigkeit:</strong> <span th:text="${difficulty}"></span></p>
+    <p><strong>Bewertung:</strong> <span th:text="${rating}"></span></p>
+</div>
+<div>
+    <h2>Log Entries</h2>
+    <table style="width: 100%;border-collapse: collapse;">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Comment</th>
+            <th>difficulty</th>
+            <th>distance</th>
+            <th>timeLength</th>
+            <th>rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${log}">
+            <td th:text="${entry.date}"></td>
+            <td th:text="${entry.comment}"></td>
+            <td th:text="${entry.difficulty}"></td>
+            <td th:text="${entry.distance}"></td>
+            <td th:text="${entry.timeLength}"></td>
+            <td th:text="${entry.rating}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

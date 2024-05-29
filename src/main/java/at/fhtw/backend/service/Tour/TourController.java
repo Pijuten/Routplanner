@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -24,6 +25,11 @@ public class TourController {
     @PostMapping(value = "/tour/add")
     public ResponseEntity<Tour> addLog(@RequestBody Tour tour) {
        return ResponseEntity.ok(startService.addTour(tour));
+    }
+    @PostMapping(value = "/tour/report")
+    public ResponseEntity.BodyBuilder createReport(@RequestBody Tour tour) throws IOException {
+            startService.createReport(tour);
+            return ResponseEntity.ok();
     }
     @DeleteMapping(value = "/tour/remove")
     public void removeLog(@RequestParam Long tourId) {

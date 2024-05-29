@@ -25,6 +25,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation group: 'org.thymeleaf', name: 'thymeleaf', version: '3.1.2.RELEASE'
+    implementation group: 'org.xhtmlrenderer', name: 'flying-saucer-pdf', version: '9.8.0'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
