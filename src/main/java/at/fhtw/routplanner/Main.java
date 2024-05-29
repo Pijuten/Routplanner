@@ -4,13 +4,13 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import lombok.Getter;
-import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.Locale;
 
 public class Main extends Application {
+    private static final Logger log = Logger.getLogger(Main.class);
+
     public static void main(String[] args){
         launch(args);
     }
@@ -18,6 +18,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         showStage(stage);
+        log.info("Stage started");
     }
 
     public static Parent showStage(Stage primaryStage) throws Exception{

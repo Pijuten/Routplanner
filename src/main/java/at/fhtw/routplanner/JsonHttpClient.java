@@ -1,8 +1,8 @@
 package at.fhtw.routplanner;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.extern.log4j.Log4j;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -11,8 +11,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
+@Log4j
 public class JsonHttpClient implements Closeable {
     private final ExecutorService executor;
 
@@ -66,13 +66,14 @@ public class JsonHttpClient implements Closeable {
                 return response.toString();
             }
         } catch (IOException e) {
+            log.error(e);
             throw new RuntimeException(e);
         }
         return null;
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         executor.shutdown();
     }
 

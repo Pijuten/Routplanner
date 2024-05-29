@@ -102,7 +102,6 @@ public class AddLogController implements Initializable {
             return false;
         } else if (distanceTextField.getText().isEmpty() || !distanceTextField.getText().matches("^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$")) {
             distanceErrorLabel.setVisible(true);
-            System.out.println("no dis");
             return false;
         } else if (timeTextField.getText().isEmpty() || !timeTextField.getText().matches("^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$")) {
             timeErrorLabel.setVisible(true);

@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +33,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+@Log4j
 public class AddRouteController implements Initializable {
     public Button saveButton;
     public Button cancleButton;
@@ -74,20 +76,6 @@ public class AddRouteController implements Initializable {
                 endpointTextField.show();
             }
         });
-
-        startPointTextField.valueProperty().addListener((obs, oldVal, newVal) -> {
-            List<Double> coords = coordinatesMap.get(newVal);
-            if (coords != null) {
-                System.out.println("Selected start point coordinates: " + coords.get(0) + ", " + coords.get(0));
-            }
-        });
-
-        endpointTextField.valueProperty().addListener((obs, oldVal, newVal) -> {
-            List<Double> coords = coordinatesMap.get(newVal);
-            if (coords != null) {
-                System.out.println("Selected start point coordinates: " + coords.get(0) + ", " + coords.get(0));
-            }
-        });
     }
 
     private void updateEndpointTextField(String newValue, ComboBox<String> comboBox, ObservableList<String> observableList) {
@@ -99,8 +87,7 @@ public class AddRouteController implements Initializable {
 
                 jsonCompletableFuture.handle((result, ex) -> {
                     if (ex != null) {
-                        System.err.println("Request failed: " + ex.getMessage());
-                        ex.printStackTrace();
+                        log.error("Request failed: " + ex.getMessage());
                         return "Error occurred";
                     } else {
                         try {
@@ -129,8 +116,6 @@ public class AddRouteController implements Initializable {
                         return result;
                     }
                 });
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
         } else {
             // Clear the list if the input is not valid
@@ -158,10 +143,8 @@ public class AddRouteController implements Initializable {
             saveButton.setOnAction(actionEvent -> {
                 try {
                     saveTour();
-                } catch (ExecutionException e) {
-                    throw new RuntimeException(e);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                } catch (ExecutionException | InterruptedException e) {
+                    log.error("No route found");
                 }
             });
         } else {
@@ -212,8 +195,8 @@ public class AddRouteController implements Initializable {
         tour.setLatStartPoint(startCoordinates.get(0));
         tour.setLongStartPoint(startCoordinates.get(1));
         tour.setEndPoint(endpointTextField.getValue());
-        tour.setLatEndPoint(startCoordinates.get(0));
-        tour.setLongEndPoint(startCoordinates.get(1));
+        tour.setLatEndPoint(endCoordinates.get(0));
+        tour.setLongEndPoint(endCoordinates.get(1));
         tour.setTransportType(TransportType.fromDisplayName(vehicleComboBox.getValue()));
 
         routBarController.editTour(tour);

@@ -1,9 +1,7 @@
 package at.fhtw.routplanner.viewModel;
 
 import at.fhtw.routplanner.JsonHttpClient;
-import at.fhtw.routplanner.Main;
 import at.fhtw.routplanner.model.OpenRoute.Direction.Direction;
-import at.fhtw.routplanner.model.OpenRoute.Geocode.Geocoding;
 import at.fhtw.routplanner.model.Tour;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -12,6 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lombok.extern.log4j.Log4j;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -19,6 +18,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
+
+@Log4j
 public class RoutBarViewModel {
 
     public RoutBarViewModel(){
@@ -28,7 +29,7 @@ public class RoutBarViewModel {
                 ObjectMapper objectMapper = new ObjectMapper();
                 objectMapper.registerModule(new JavaTimeModule());
                 try {
-                    List<Tour> tours1 = objectMapper.readValue(list, new TypeReference<List<Tour>>() {
+                    List<Tour> tours1 = objectMapper.readValue(list, new TypeReference<>() {
                     });
 
                     tours.addAll(tours1);
@@ -37,15 +38,15 @@ public class RoutBarViewModel {
                 }
             }).exceptionally(ex -> {
                 // Handle exceptions if CompletableFuture completes exceptionally
-                ex.printStackTrace();
+                log.error(ex);
                 return null; // Return a default value or handle the exception as needed
             });
         }catch(Exception e){
-            e.printStackTrace();
+            log.error(e);
         }
 
     }
-    private ObservableList<Tour> tours = FXCollections.observableArrayList();
+    private final ObservableList<Tour> tours = FXCollections.observableArrayList();
 
     public ObservableList<Tour> getTours(){
         return tours;
@@ -65,11 +66,9 @@ public class RoutBarViewModel {
                 }
             }).exceptionally(ex -> {
                 // Handle exceptions if CompletableFuture completes exceptionally
-                ex.printStackTrace();
+                log.error(ex);
                 return null;
             });
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
     public void removeTour(Long id){
@@ -82,14 +81,11 @@ public class RoutBarViewModel {
         }
 
         try(JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
-            jsonHttpClient.sendRequestAsync(null, "http://localhost:8080/tour/remove?logId="+id, JsonHttpClient.Method.DELETE);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            jsonHttpClient.sendRequestAsync(null, "http://localhost:8080/tour/remove?tourId="+id, JsonHttpClient.Method.DELETE);
         }
+        log.info("Tour removed id: "+id);
     }
-    public void selectTour(){
-    }
-    private Direction direction;
+
     public CompletableFuture<Direction> getDirection(List<Double> coordinates) {
         CompletableFuture<Direction> future = new CompletableFuture<>();
 
@@ -97,7 +93,6 @@ public class RoutBarViewModel {
             CompletableFuture<String> tourFuture = jsonHttpClient.sendRequestAsync(coordinates, "http://localhost:8080/route/direction", JsonHttpClient.Method.POST);
 
             tourFuture.thenAcceptAsync(tourResponse -> {
-                System.out.println(tourResponse);
                 ObjectMapper objectMapper = new ObjectMapper();
                 objectMapper.registerModule(new JavaTimeModule());
                 try {
@@ -108,21 +103,18 @@ public class RoutBarViewModel {
                 }
             }).exceptionally(ex -> {
                 // Handle exceptions if CompletableFuture completes exceptionally
-                ex.printStackTrace();
+                log.error(ex);
                 future.completeExceptionally(ex);
                 return null;
             });
-        } catch (IOException e) {
-            future.completeExceptionally(e);
         }
-
+        log.info("direction received");
         return future;
     }
     public void editTour(Tour tour) {
         try(JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
             jsonHttpClient.sendRequestAsync(tour, "http://localhost:8080/tour/add", JsonHttpClient.Method.POST);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
+        log.info("Tour edited");
     }
 }

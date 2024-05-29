@@ -5,18 +5,18 @@ import at.fhtw.routplanner.ObserverSelectedTour;
 import at.fhtw.routplanner.UpdateTourListener;
 import at.fhtw.routplanner.model.Log;
 import at.fhtw.routplanner.model.Tour;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.CompletableFuture;
 
+@Log4j
 public class LogBarViewModel implements UpdateTourListener {
 
     public LogBarViewModel() {
@@ -52,40 +52,33 @@ public class LogBarViewModel implements UpdateTourListener {
         tour.getLog().remove(id);
         try(JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
             jsonHttpClient.sendRequestAsync(tour, "http://localhost:8080/tour/add", JsonHttpClient.Method.POST);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
     public void editLog(Log log) {
         try(JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
             jsonHttpClient.sendRequestAsync(tour, "http://localhost:8080/tour/add", JsonHttpClient.Method.POST);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
-    public void saveLog(Log log) {
+    public void saveLog(Log logItem) {
         if(tour.getLog()==null)
             tour.setLog(
-                    new ArrayList<Log>()
+                    new ArrayList<>()
             );
-        data.add(log);
-        tour.addLog(log);
+        data.add(logItem);
+        tour.addLog(logItem);
         try(JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
             CompletableFuture<String> jsonCompletableFuture = jsonHttpClient.sendRequestAsync(tour, "http://localhost:8080/tour/add", JsonHttpClient.Method.POST);
             jsonCompletableFuture.handle((result, ex) -> {
                 if (ex != null) {
-                    System.err.println("Request failed: " + ex.getMessage());
-                    ex.printStackTrace();
-                    return "Error occurred";
+                    log.error(ex.getMessage());
+                    return null;
                 } else {
-                    System.out.println("Request succeeded: " + result);
+                    log.info("Direction Request successful");
                     return result;
                 }
             });
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 }
