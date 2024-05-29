@@ -7,7 +7,7 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
-public class Segments {
-    private double distance;
-    private double duration;
+public class Summary{
+    public double distance;
+    public double duration;
 }

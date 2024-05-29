@@ -1,4 +1,4 @@
-package at.fhtw.backend.service.Start;
+package at.fhtw.backend.service.Tour;
 
 import at.fhtw.backend.enums.TransportType;
 import at.fhtw.backend.model.Log;
@@ -15,11 +15,12 @@ import java.util.List;
 class StartServiceTest {
 
     @Autowired
-    private StartService startService;
+    private TourService startService;
     @Test
     void SaveLogTest(){
-        Tour tour = new Tour("Test","test","test",23.23,23.3,"test",23.23,5345.3, TransportType.Bike,23.23,23.4f,"test",null);
+        Tour tour = new Tour("Test","test","test",23.23,23.3,"test",23.23,5345.3, TransportType.Bike,23.23,23.4f,"test",new ArrayList<>());
         Log log = new Log(LocalDate.now(),"test",34,4,34.43,34.3,3);
+        tour.addLog(log);
         List<Log> logs = new ArrayList<>();
         logs.add(log);
         tour.setLog(logs);

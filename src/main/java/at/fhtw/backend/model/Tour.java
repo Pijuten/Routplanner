@@ -1,13 +1,13 @@
 package at.fhtw.backend.model;
 
 import at.fhtw.backend.enums.TransportType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
 
 @Entity
 @AllArgsConstructor
@@ -17,7 +17,7 @@ import java.util.List;
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tour_id;
+    private Long tourId;
     private String tourName;
     private String description;
     private String startPoint;
@@ -30,10 +30,11 @@ public class Tour {
     private Double distance;
     private Float time;
     private String information;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tour")
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Log> log;
-    //tour description, from, to, transport type, tour distance, estimated time, route information
-    public Tour(String tourName,String description, String startPoint, Double latStartPoint, Double longStartPoint, String endPoint, Double latEndPoint, Double longEndPoint, TransportType transportType,Double distance, Float time, String information,List<Log> log) {
+
+    public Tour(String tourName, String description, String startPoint, Double latStartPoint, Double longStartPoint, String endPoint, Double latEndPoint, Double longEndPoint, TransportType transportType, Double distance, Float time, String information, List<Log> log) {
         this.tourName = tourName;
         this.description = description;
         this.startPoint = startPoint;
@@ -47,5 +48,27 @@ public class Tour {
         this.time = time;
         this.information = information;
         this.log = log;
+    }
+
+    @Override
+    public String toString() {
+        return "Tour{" +
+                "tourId=" + tourId +
+                ", tourName='" + tourName + '\'' +
+                ", description='" + description + '\'' +
+                ", startPoint='" + startPoint + '\'' +
+                ", latStartPoint=" + latStartPoint +
+                ", longStartPoint=" + longStartPoint +
+                ", endPoint='" + endPoint + '\'' +
+                ", latEndPoint=" + latEndPoint +
+                ", longEndPoint=" + longEndPoint +
+                ", transportType=" + transportType +
+                ", distance=" + distance +
+                ", time=" + time +
+                ", information='" + information + '\'' +
+                '}';
+    }
+    public void addLog(Log log) {
+        this.log.add(log);
     }
 }

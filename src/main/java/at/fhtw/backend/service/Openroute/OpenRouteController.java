@@ -1,10 +1,14 @@
 package at.fhtw.backend.service.Openroute;
 
 import at.fhtw.backend.model.OpenRoute.Direction.Direction;
-import at.fhtw.backend.model.OpenRoute.Geocode.Feature;
+import at.fhtw.backend.model.OpenRoute.Geocode.Geocoding;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -17,12 +21,13 @@ public class OpenRouteController {
     }
 
     @GetMapping("/route/geocode")
-    public List<Feature> GetGeocode(@RequestBody String locationName) {
-        return openRouteService.GetGeocode(locationName);
+    public ResponseEntity<Geocoding> getGeocode(@RequestParam(name = "locationname") String locationName) {
+        Geocoding geocoding = openRouteService.GetGeocode(locationName);
+        return new ResponseEntity<>(geocoding, HttpStatus.OK);
     }
-    @GetMapping("/route/direction")
-    public Direction GetDirection(@RequestBody List<Double> directions) {
-        return openRouteService.GetDirections(directions);
+    @PostMapping("/route/direction")
+    public ResponseEntity <Direction> GetDirection(@RequestBody List<Double> directions) {;
+        return ResponseEntity.ok(openRouteService.GetDirections(directions));
 
     }
 }

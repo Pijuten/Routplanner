@@ -7,6 +7,6 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter @Setter
 public class Feature {
-    private Geometry geometry;
-    private Properties properties;
+    public Properties properties;
+    public Geometry geometry;
 }
