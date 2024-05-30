@@ -12,7 +12,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import lombok.extern.log4j.Log4j;
 
 import java.io.IOException;
@@ -111,6 +113,10 @@ public class RoutBarController implements Initializable {
 
         stage.setScene(scene);
         stage.setResizable(false);
+
+        stage.initModality(Modality.WINDOW_MODAL);
+        Window primaryStage = addButton.getScene().getWindow();
+        stage.initOwner(primaryStage);
 
         stage.show();
     }

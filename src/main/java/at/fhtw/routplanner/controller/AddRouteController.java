@@ -5,6 +5,7 @@ import at.fhtw.routplanner.enums.TransportType;
 import at.fhtw.routplanner.model.OpenRoute.Direction.Direction;
 import at.fhtw.routplanner.model.OpenRoute.Geocode.Feature;
 import at.fhtw.routplanner.model.OpenRoute.Geocode.Geocoding;
+import at.fhtw.routplanner.model.Route;
 import at.fhtw.routplanner.model.Tour;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +23,6 @@ import javafx.stage.Stage;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -148,7 +148,13 @@ public class AddRouteController implements Initializable {
                 }
             });
         } else {
-            saveButton.setOnAction(actionEvent -> editTour());
+            saveButton.setOnAction(actionEvent -> {
+                try {
+                    editTour();
+                } catch (ExecutionException | InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
     }
 
@@ -162,8 +168,8 @@ public class AddRouteController implements Initializable {
         List<Double> endCoordinates = coordinatesMap.get(endpointTextField.getValue());
         List<Double> coordinates = coordinatesMap.get(startPointTextField.getValue());
         coordinates.addAll(endCoordinates);
-
-        Direction direction = routBarController.routBarViewModel.getDirection(coordinates).get();
+        Route route = new Route(coordinates, TransportType.fromDisplayName(vehicleComboBox.getValue()));
+        Direction direction = routBarController.routBarViewModel.getDirection(route).get();
 
         Tour tour = new Tour(
                 tourNameTextField.getText(),
@@ -173,14 +179,17 @@ public class AddRouteController implements Initializable {
                 endpointTextField.getValue(),
                 endCoordinates.get(0), endCoordinates.get(1),
                 TransportType.fromDisplayName(vehicleComboBox.getValue()),
-                direction.getFeatures().get(0).getProperties().getSummary().getDistance(), direction.getFeatures().get(0).getProperties().getSummary().getDuration(), "test", null
+                direction.getFeatures().get(0).getProperties().getSummary().getDistance(),
+                direction.getFeatures().get(0).getProperties().getSummary().getDuration(),
+                "test",
+                null
         );
 
         routBarController.saveTour(tour);
         closeStage();
     }
 
-    public void editTour() {
+    public void editTour() throws ExecutionException, InterruptedException {
         setErrorTextInvis();
         if (!checkInput()) {
             return;
@@ -188,6 +197,10 @@ public class AddRouteController implements Initializable {
 
         List<Double> startCoordinates = coordinatesMap.get(startPointTextField.getValue());
         List<Double> endCoordinates = coordinatesMap.get(endpointTextField.getValue());
+        List<Double> coordinates = coordinatesMap.get(startPointTextField.getValue());
+        coordinates.addAll(endCoordinates);
+        Route route = new Route(coordinates, TransportType.fromDisplayName(vehicleComboBox.getValue()));
+        Direction direction = routBarController.routBarViewModel.getDirection(route).get();
 
         tour.setTourName(tourNameTextField.getText());
         tour.setDescription(descriptionTextField.getText());
@@ -197,7 +210,10 @@ public class AddRouteController implements Initializable {
         tour.setEndPoint(endpointTextField.getValue());
         tour.setLatEndPoint(endCoordinates.get(0));
         tour.setLongEndPoint(endCoordinates.get(1));
-        tour.setTransportType(TransportType.fromDisplayName(vehicleComboBox.getValue()));
+        tour.setTime(direction.getFeatures().get(0).getProperties().getSummary().getDuration());
+        tour.setDistance(direction.getFeatures().get(0).getProperties().getSummary().getDistance());
+
+                tour.setTransportType(TransportType.fromDisplayName(vehicleComboBox.getValue()));
 
         routBarController.editTour(tour);
         closeStage();

@@ -2,6 +2,7 @@ package at.fhtw.routplanner.viewModel;
 
 import at.fhtw.routplanner.JsonHttpClient;
 import at.fhtw.routplanner.model.OpenRoute.Direction.Direction;
+import at.fhtw.routplanner.model.Route;
 import at.fhtw.routplanner.model.Tour;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -12,7 +13,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.extern.log4j.Log4j;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -86,11 +86,11 @@ public class RoutBarViewModel {
         log.info("Tour removed id: "+id);
     }
 
-    public CompletableFuture<Direction> getDirection(List<Double> coordinates) {
+    public CompletableFuture<Direction> getDirection(Route route) {
         CompletableFuture<Direction> future = new CompletableFuture<>();
 
         try (JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
-            CompletableFuture<String> tourFuture = jsonHttpClient.sendRequestAsync(coordinates, "http://localhost:8080/route/direction", JsonHttpClient.Method.POST);
+            CompletableFuture<String> tourFuture = jsonHttpClient.sendRequestAsync(route, "http://localhost:8080/route/direction", JsonHttpClient.Method.POST);
 
             tourFuture.thenAcceptAsync(tourResponse -> {
                 ObjectMapper objectMapper = new ObjectMapper();

@@ -53,7 +53,7 @@ public class JsonHttpClient implements Closeable {
             }
 
             int responseCode = connection.getResponseCode();
-            if(responseCode == HttpURLConnection.HTTP_OK){
+            if(responseCode >= 200 && responseCode < 300){
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
                 StringBuilder response = new StringBuilder();

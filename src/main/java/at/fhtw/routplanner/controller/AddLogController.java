@@ -69,7 +69,7 @@ public class AddLogController implements Initializable {
         if (!checkInput()) {
             return;
         }
-        Log log = new Log(32L, datePicker.getValue(), commentTextField.getText(), 23, Integer.parseInt(difficultyTextField.getText()), Double.parseDouble(distanceTextField.getText()) , Double.parseDouble(timeTextField.getText()), Integer.parseInt(ratingTextField.getText()));
+        Log log = new Log(null, datePicker.getValue(), commentTextField.getText(), null, Integer.parseInt(difficultyTextField.getText()), Double.parseDouble(distanceTextField.getText()) , Double.parseDouble(timeTextField.getText()), Integer.parseInt(ratingTextField.getText()));
         logBarController.saveLog(log);
         stage.close();
     }

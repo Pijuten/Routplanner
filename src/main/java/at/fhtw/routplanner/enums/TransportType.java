@@ -2,15 +2,15 @@ package at.fhtw.routplanner.enums;
 
 public enum TransportType {
 
-    FootWalk("Walk"),
-    FootHike("Hike"),
-    Wheelchair("Barrier Free"),
-    Bike("Bike"),
-    RoadBike("Roadbike"),
-    MountainBike("Mountain bike"),
-    EBike("E-Bike"),
-    Car("Car"),
-    HeavyVehicle("Heavy Vehicle");
+    FootWalk("foot-walking"),
+    FootHike("foot-hiking"),
+    Wheelchair("wheelchair"),
+    Bike("cycling-regular"),
+    RoadBike("cycling-road"),
+    MountainBike("cycling-mountain"),
+    EBike("cycling-electric"),
+    Car("driving-car"),
+    HeavyVehicle("driving-hgv");
 
     private final String displayName;
     TransportType(String displayName){

@@ -8,15 +8,15 @@ class TransportTypeTest {
 
     @Test
     void testToString() {
-        assertEquals("Walk", TransportType.FootWalk.toString());
-        assertEquals("Hike", TransportType.FootHike.toString());
-        assertEquals("Barrier Free", TransportType.Wheelchair.toString());
-        assertEquals("Bike", TransportType.Bike.toString());
-        assertEquals("Roadbike", TransportType.RoadBike.toString());
-        assertEquals("Mountain bike", TransportType.MountainBike.toString());
-        assertEquals("E-Bike", TransportType.EBike.toString());
-        assertEquals("Car", TransportType.Car.toString());
-        assertEquals("Heavy Vehicle", TransportType.HeavyVehicle.toString());
+        assertEquals("foot-walking", TransportType.FootWalk.toString());
+        assertEquals("foot-hiking", TransportType.FootHike.toString());
+        assertEquals("wheelchair", TransportType.Wheelchair.toString());
+        assertEquals("cycling-regular", TransportType.Bike.toString());
+        assertEquals("cycling-road", TransportType.RoadBike.toString());
+        assertEquals("cycling-mountain", TransportType.MountainBike.toString());
+        assertEquals("cycling-electric", TransportType.EBike.toString());
+        assertEquals("driving-car", TransportType.Car.toString());
+        assertEquals("driving-hgv", TransportType.HeavyVehicle.toString());
     }
 
     @Test
