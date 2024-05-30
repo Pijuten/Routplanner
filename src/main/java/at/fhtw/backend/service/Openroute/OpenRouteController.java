@@ -2,6 +2,7 @@ package at.fhtw.backend.service.Openroute;
 
 import at.fhtw.backend.model.OpenRoute.Direction.Direction;
 import at.fhtw.backend.model.OpenRoute.Geocode.Geocoding;
+import at.fhtw.backend.model.Route;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 
 @Controller
 public class OpenRouteController {
@@ -26,8 +26,8 @@ public class OpenRouteController {
         return new ResponseEntity<>(geocoding, HttpStatus.OK);
     }
     @PostMapping("/route/direction")
-    public ResponseEntity <Direction> GetDirection(@RequestBody List<Double> directions) {;
-        return ResponseEntity.ok(openRouteService.GetDirections(directions));
+    public ResponseEntity <Direction> GetDirection(@RequestBody Route route) {
+        return ResponseEntity.ok(openRouteService.GetDirections(route));
 
     }
 }

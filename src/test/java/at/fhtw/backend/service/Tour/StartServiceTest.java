@@ -18,7 +18,7 @@ class StartServiceTest {
     private TourService startService;
     @Test
     void SaveLogTest(){
-        Tour tour = new Tour("Test","test","test",23.23,23.3,"test",23.23,5345.3, TransportType.Bike,23.23,23.4f,"test",new ArrayList<>());
+        Tour tour = new Tour("Test","test","test",23.23,23.3,"test",23.23,5345.3, TransportType.Bike,23.23,23.4,"test",new ArrayList<>());
         Log log = new Log(LocalDate.now(),"test",34,4,34.43,34.3,3);
         tour.addLog(log);
         List<Log> logs = new ArrayList<>();

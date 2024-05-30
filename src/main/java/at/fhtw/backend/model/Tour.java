@@ -28,13 +28,13 @@ public class Tour {
     private Double longEndPoint;
     private TransportType transportType;
     private Double distance;
-    private Float time;
+    private Double time;
     private String information;
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Log> log;
 
-    public Tour(String tourName, String description, String startPoint, Double latStartPoint, Double longStartPoint, String endPoint, Double latEndPoint, Double longEndPoint, TransportType transportType, Double distance, Float time, String information, List<Log> log) {
+    public Tour(String tourName, String description, String startPoint, Double latStartPoint, Double longStartPoint, String endPoint, Double latEndPoint, Double longEndPoint, TransportType transportType, Double distance, Double time, String information, List<Log> log) {
         this.tourName = tourName;
         this.description = description;
         this.startPoint = startPoint;
@@ -52,7 +52,7 @@ public class Tour {
 
     @Override
     public String toString() {
-        return "Tour{" +
+        return "{" +
                 "tourId=" + tourId +
                 ", tourName='" + tourName + '\'' +
                 ", description='" + description + '\'' +

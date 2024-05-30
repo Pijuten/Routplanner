@@ -1,9 +1,12 @@
 package at.fhtw.backend.service.Openroute;
 
+import at.fhtw.backend.enums.TransportType;
 import at.fhtw.backend.model.OpenRoute.Direction.Direction;
 import at.fhtw.backend.model.OpenRoute.Geocode.Geocoding;
+import at.fhtw.backend.model.Route;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,8 @@ class OpenRouteServiceTest {
         directions.add(49.41461);
         directions.add(8.687872);
         directions.add(49.420318);
-        Direction direction = service.GetDirections(directions);
+        Route route = new Route(directions, TransportType.Car);
+        Direction direction = service.GetDirections(route);
+        assertEquals(direction.getFeatures().get(0).getProperties().getSummary().getDistance(), 1408.8);
     }
 }
