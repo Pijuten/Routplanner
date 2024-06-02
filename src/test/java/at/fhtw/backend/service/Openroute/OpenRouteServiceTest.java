@@ -4,6 +4,7 @@ import at.fhtw.backend.enums.TransportType;
 import at.fhtw.backend.model.OpenRoute.Direction.Direction;
 import at.fhtw.backend.model.OpenRoute.Geocode.Geocoding;
 import at.fhtw.backend.model.Route;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,6 +16,9 @@ class OpenRouteServiceTest {
     void getOpenRouteTest() {
         OpenRouteService service = new OpenRouteService();
         Geocoding result= service.GetGeocode("Spaungasse");
+        Assertions.assertEquals(result.getFeatures().get(0).getProperties().getName(), "Spaungasse");
+        Assertions.assertEquals(result.getFeatures().get(0).getGeometry().getCoordinates().get(0), 16.365736);
+        Assertions.assertEquals(result.getFeatures().get(0).getGeometry().getCoordinates().get(1), 48.234628);
     }
     @Test
     void getDirectionTest(){

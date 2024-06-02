@@ -51,7 +51,7 @@ public class ReportGenerator {
         return templateEngine.process("thymeleaf_template", context);
     }
     public void generatePdfFromHtml(String html) throws IOException {
-        String outputFolder = System.getProperty("user.home") + File.separator + "thymeleaf.pdf";
+        String outputFolder = System.getProperty("user.dir") + File.separator + "thymeleaf.pdf";
         OutputStream outputStream = new FileOutputStream(outputFolder);
 
         ITextRenderer renderer = new ITextRenderer();
