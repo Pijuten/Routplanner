@@ -1,6 +1,7 @@
 package at.fhtw.routplanner;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,7 +11,7 @@ import java.util.Locale;
 
 public class Main extends Application {
     private static final Logger log = Logger.getLogger(Main.class);
-
+    private static HostServices hostServices;
     public static void main(String[] args){
         launch(Main.class, args);
     }
@@ -18,6 +19,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         showStage(stage);
+        hostServices = getHostServices();
+
         log.info("Stage started");
     }
 
@@ -38,5 +41,9 @@ public class Main extends Application {
         // Show the stage
         primaryStage.show();
         return root;
+    }
+
+    public static void showMapInDefaultBrowser(){
+        hostServices.showDocument(Main.class.getResource("/at/fhtw/routplanner/html/leaflet.html").toExternalForm());
     }
 }

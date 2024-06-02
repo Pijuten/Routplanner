@@ -81,9 +81,7 @@
             <BorderPane prefHeight="240.0" prefWidth="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <center>
-                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="372.0" BorderPane.alignment="CENTER">
-                        <WebView fx:id="hyperlink" VBox.vgrow="ALWAYS"/>
-                    </VBox>
+                    <Button fx:id="viewRoute" mnemonicParsing="false" text="%overviewTab.viewRoute"/>
                 </center>
             </BorderPane>
         </AnchorPane>
@@ -93,7 +91,7 @@
         <BorderPane prefHeight="240.0" prefWidth="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <center>
-                <Button fx:id="createReport" mnemonicParsing="false" text="+"/>
+                <Button fx:id="createReport" mnemonicParsing="false" text="%overviewTab.createReport"/>
             </center>
         </BorderPane>
     </AnchorPane>

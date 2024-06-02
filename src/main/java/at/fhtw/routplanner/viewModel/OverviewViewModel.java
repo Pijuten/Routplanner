@@ -2,6 +2,7 @@ package at.fhtw.routplanner.viewModel;
 
 import at.fhtw.routplanner.JsonHttpClient;
 import at.fhtw.routplanner.ObserverSelectedTour;
+import at.fhtw.routplanner.Service.DirectionMapFileWriter;
 import at.fhtw.routplanner.UpdateTourListener;
 import at.fhtw.routplanner.model.Tour;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,10 +16,9 @@ public class OverviewViewModel implements UpdateTourListener {
     private final StringProperty currentDescription = new SimpleStringProperty("");
     private final StringProperty currentStartPoint = new SimpleStringProperty("");
     private final StringProperty currentEndpoint = new SimpleStringProperty("");
+    private final StringProperty currentTime = new SimpleStringProperty("");
     private final StringProperty currentTransportType = new SimpleStringProperty("");
     private final StringProperty currentDistance = new SimpleStringProperty("");
-    private final StringProperty currentTime = new SimpleStringProperty("");
-    private final  StringProperty mapUrl = new SimpleStringProperty("");
     public  OverviewViewModel(){
         ObserverSelectedTour.getInstance().register(this);
     }
@@ -32,6 +32,7 @@ public class OverviewViewModel implements UpdateTourListener {
         currentTransportType.set(tour.getTransportType().toString());
         currentDistance.set(tour.getDistance().toString()+" m");
         currentTime.set(Math.round((tour.getTime()/60)) +" min");
+        DirectionMapFileWriter.writeToFile(tour);
     }
 
     public void createReport() {
