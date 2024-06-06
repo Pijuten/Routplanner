@@ -26,6 +26,8 @@
                     <padding>
                         <Insets right="5.0"/>
                     </padding>
+                    <Button fx:id="upButton" mnemonicParsing="false" text="↑"/>
+                    <Button fx:id="downButton" mnemonicParsing="false" text="↓"/>
                     <Button fx:id="addButton" mnemonicParsing="false" text="+"/>
                     <Button fx:id="removeButton" mnemonicParsing="false" text="-"/>
                     <Button fx:id="editButton" mnemonicParsing="false" text="..."/>

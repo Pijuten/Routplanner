@@ -30,7 +30,8 @@ public class OptionBarViewModel {
         try {
             String content = Files.readString(Paths.get(selectedFile.getAbsolutePath()), StandardCharsets.UTF_8);
             System.out.println(content);
-            tours = objectMapper.readValue(content, new TypeReference<List<Tour>>(){});
+            tours = objectMapper.readValue(content, new TypeReference<>() {
+            });
             for (Tour tour : tours) {
                 routBarViewModel.addTour(tour);
             }

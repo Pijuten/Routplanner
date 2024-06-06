@@ -1,5 +1,6 @@
 package at.fhtw.routplanner.controller;
 
+import at.fhtw.routplanner.CustomCombobox;
 import at.fhtw.routplanner.JsonHttpClient;
 import at.fhtw.routplanner.enums.TransportType;
 import at.fhtw.routplanner.model.OpenRoute.Direction.Direction;
@@ -37,8 +38,8 @@ import java.util.concurrent.ExecutionException;
 public class AddRouteController implements Initializable {
     public Button saveButton;
     public Button cancleButton;
-    public ComboBox<String> vehicleComboBox;
-    public ComboBox<String> endpointTextField;
+    public CustomCombobox vehicleComboBox;
+    public CustomCombobox endpointTextField;
     public TextField tourNameTextField;
     public ComboBox<String> startPointTextField;
     public TextField descriptionTextField;
@@ -82,7 +83,7 @@ public class AddRouteController implements Initializable {
         if (newValue.length() > 3) {
             try (JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
                 CompletableFuture<String> jsonCompletableFuture = jsonHttpClient.sendRequestAsync(
-                        null, "http://localhost:8080/route/geocode?locationname=" + newValue, JsonHttpClient.Method.GET
+                        null, "http://localhost:8080/route/geocode?locationname=" + newValue.replace(" ", "+"), JsonHttpClient.Method.GET
                 );
 
                 jsonCompletableFuture.handle((result, ex) -> {

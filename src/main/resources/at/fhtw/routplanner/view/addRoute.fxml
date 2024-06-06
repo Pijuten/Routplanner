@@ -12,6 +12,7 @@
 
 
 <?import javafx.scene.control.ComboBox?>
+<?import at.fhtw.routplanner.CustomCombobox?>
 <BorderPane
         xmlns:fx="http://javafx.com/fxml"
         fx:controller="at.fhtw.routplanner.controller.AddRouteController"
@@ -55,16 +56,16 @@
            <Label alignment="CENTER" text="%addRout.vehicle"  GridPane.halignment="RIGHT" GridPane.rowIndex="4"/>
            <Label fx:id="vehicleSelectionErrorLabel" alignment="CENTER" visible="false" text="%addRout.vehicleTypeError" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
 
-           <ComboBox fx:id="vehicleComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
+           <CustomCombobox fx:id="vehicleComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
               <GridPane.margin>
                   <Insets left="5.0" right="5.0"/>
               </GridPane.margin>
-           </ComboBox>
-           <ComboBox fx:id="endpointTextField" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+           </CustomCombobox>
+           <CustomCombobox  fx:id="endpointTextField" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
               <GridPane.margin>
                   <Insets left="5.0" right="5.0"/>
               </GridPane.margin>
-           </ComboBox>
+           </CustomCombobox>
            <ComboBox fx:id="startPointTextField" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
               <GridPane.margin>
                   <Insets left="5.0" right="5.0"/>

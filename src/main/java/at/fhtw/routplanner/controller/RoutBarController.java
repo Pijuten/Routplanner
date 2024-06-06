@@ -29,6 +29,8 @@ public class RoutBarController implements Initializable {
     public Button removeButton;
     public Button addButton;
     public Button editButton;
+    public Button downButton;
+    public Button upButton;
 
 
     public RoutBarController(RoutBarViewModel routBarViewModel) {
@@ -45,9 +47,13 @@ public class RoutBarController implements Initializable {
         editButtonListener(editButton);
         editButton.setDisable(true);
         removeButton.setDisable(true);
+        downButton.setDisable(true);
+        upButton.setDisable(true);
         tourListView.getSelectionModel().getSelectedItems().addListener((ListChangeListener<? super Tour>) change -> {
             editButton.setDisable(tourListView.getSelectionModel().getSelectedItems().isEmpty());
             removeButton.setDisable(tourListView.getSelectionModel().getSelectedItems().isEmpty());
+            downButton.setDisable(tourListView.getSelectionModel().getSelectedItems().isEmpty());
+            upButton.setDisable(tourListView.getSelectionModel().getSelectedItems().isEmpty());
         } );
     }
 
