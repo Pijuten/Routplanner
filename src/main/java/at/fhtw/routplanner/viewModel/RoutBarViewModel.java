@@ -56,6 +56,7 @@ public class RoutBarViewModel {
         return tours;
     }
     public void addTour(Tour tour){
+        tour.setTourPosition(tours.size());
         try(JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
             CompletableFuture<String> tourFuture = jsonHttpClient.sendRequestAsync(tour, "http://localhost:8080/tour/add", JsonHttpClient.Method.POST);
             tourFuture.thenAcceptAsync(tourResponse -> {
@@ -65,7 +66,6 @@ public class RoutBarViewModel {
                     Tour responseTour = objectMapper.readValue(tourResponse,Tour.class);
                     tour.setTourId(responseTour.getTourId());
                     Platform.runLater(() -> {
-                        tour.setTourPosition(tours.size());
                         tours.add(tour);
                     });
                 } catch (JsonProcessingException e) {
