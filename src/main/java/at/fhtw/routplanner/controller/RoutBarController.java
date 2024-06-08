@@ -45,6 +45,8 @@ public class RoutBarController implements Initializable {
         removeButtonListener(removeButton);
         addButtonListener(addButton);
         editButtonListener(editButton);
+        upButtonListener(upButton);
+        downButtonListener(downButton);
         editButton.setDisable(true);
         removeButton.setDisable(true);
         downButton.setDisable(true);
@@ -57,6 +59,19 @@ public class RoutBarController implements Initializable {
         } );
     }
 
+    private void downButtonListener(Button downButton) {
+        downButton.setOnAction(event -> {
+            int selectedTourPosition = tourListView.getSelectionModel().getSelectedItem().getTourPosition();
+            routBarViewModel.changeTourPosition(selectedTourPosition, false);
+        });
+    }
+
+    private void upButtonListener(Button upButton) {
+        upButton.setOnAction(event -> {
+            int selectedTourPosition = tourListView.getSelectionModel().getSelectedItem().getTourPosition();
+            routBarViewModel.changeTourPosition(selectedTourPosition, true);
+        });
+    }
 
 
     private void removeButtonListener(Button removeButton) {
@@ -73,9 +88,7 @@ public class RoutBarController implements Initializable {
 
     private void addButtonListener(Button addButton) {
 
-        addButton.setOnAction(event -> {
-            setupStage(null);
-        });
+        addButton.setOnAction(event -> setupStage(null));
     }
     private void editButtonListener(Button editButton) {
 

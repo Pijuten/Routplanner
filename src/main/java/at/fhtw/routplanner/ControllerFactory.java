@@ -16,9 +16,9 @@ public class ControllerFactory {
     }
     private ControllerFactory(){
         this.logBarViewModel = new LogBarViewModel();
-        this.optionBarViewModel = new OptionBarViewModel();
         this.overviewViewModel = new OverviewViewModel();
         this.routBarViewModel = new RoutBarViewModel();
+        this.optionBarViewModel = new OptionBarViewModel(routBarViewModel);
         this.searchBarViewModel = new SearchBarViewModel();
         mainViewModel = new MainViewModel(logBarViewModel,optionBarViewModel,overviewViewModel,routBarViewModel,searchBarViewModel);
     }

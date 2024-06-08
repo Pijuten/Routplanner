@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.extern.log4j.Log4j;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -33,6 +34,7 @@ public class RoutBarViewModel {
                     });
 
                     tours.addAll(tours1);
+                    FXCollections.sort(tours, Comparator.comparingInt(Tour::getTourPosition));
                 } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }
@@ -60,7 +62,10 @@ public class RoutBarViewModel {
                 try {
                     Tour responseTour = objectMapper.readValue(tourResponse,Tour.class);
                     tour.setTourId(responseTour.getTourId());
-                    Platform.runLater(() -> tours.add(tour));
+                    Platform.runLater(() -> {
+                        tour.setTourPosition(tours.size());
+                        tours.add(tour);
+                    });
                 } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }
@@ -116,5 +121,29 @@ public class RoutBarViewModel {
             jsonHttpClient.sendRequestAsync(tour, "http://localhost:8080/tour/add", JsonHttpClient.Method.POST);
         }
         log.info("Tour edited");
+    }
+
+    public void changeTourPosition( int tourPosition, boolean up) {
+        // Ensure the position is valid
+        if (tourPosition < 0 || tourPosition >= tours.size()) {
+            throw new IndexOutOfBoundsException("Invalid tour position");
+        }
+
+        int swapPosition = up ? tourPosition - 1 : tourPosition + 1;
+
+        // Ensure the swap position is valid
+        if (swapPosition < 0 || swapPosition >= tours.size()) {
+            return; // No swap if the swap position is out of bounds
+        }
+
+        // Perform the swap
+        Tour temp = tours.get(tourPosition);
+        tours.get(tourPosition).setTourPosition(swapPosition);
+        tours.get(swapPosition).setTourPosition(tourPosition);
+        tours.set(tourPosition, tours.get(swapPosition));
+        tours.set(swapPosition, temp);
+        for(Tour tour: tours){
+            editTour(tour);
+        }
     }
 }

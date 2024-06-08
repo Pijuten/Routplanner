@@ -20,6 +20,7 @@ public class ObserverSelectedTour {
         for(var listener: updateTourListeners)
             listener.updateTour(selectedTour);
         log.info("updateSelectedTour");
+        log.info(selectedTour.getTourPosition());
     }
     public void register(UpdateTourListener updateTourListener){
         updateTourListeners.add(updateTourListener);

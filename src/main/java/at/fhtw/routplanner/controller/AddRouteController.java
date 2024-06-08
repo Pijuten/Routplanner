@@ -38,10 +38,10 @@ import java.util.concurrent.ExecutionException;
 public class AddRouteController implements Initializable {
     public Button saveButton;
     public Button cancleButton;
-    public CustomCombobox vehicleComboBox;
+    public ComboBox<String> vehicleComboBox;
     public CustomCombobox endpointTextField;
     public TextField tourNameTextField;
-    public ComboBox<String> startPointTextField;
+    public CustomCombobox startPointTextField;
     public TextField descriptionTextField;
     public Label tourNameErrorLabel;
     public Label descriptionErrorLabel;
@@ -65,13 +65,19 @@ public class AddRouteController implements Initializable {
         cancleButton.setOnAction(actionEvent -> stage.close());
         startPointTextField.setItems(startpointItems);
         startPointTextField.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
-            updateEndpointTextField(newValue, startPointTextField, startpointItems);
-            if (!startPointTextField.isShowing()) {
-                startPointTextField.show();
+            // Check if the new value is not already in the list
+            boolean isNewItem = startPointTextField.getItems().stream().noneMatch(item -> item.equals(newValue));
+
+            if (isNewItem) {
+                updateEndpointTextField(newValue, startPointTextField, startpointItems);
+                if (!startPointTextField.isShowing()) {
+                    startPointTextField.show();
+                }
             }
         });
         endpointTextField.setItems(endpointItems);
         endpointTextField.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+
             updateEndpointTextField(newValue, endpointTextField, endpointItems);
             if (!endpointTextField.isShowing()) {
                 endpointTextField.show();
@@ -80,6 +86,7 @@ public class AddRouteController implements Initializable {
     }
 
     private void updateEndpointTextField(String newValue, ComboBox<String> comboBox, ObservableList<String> observableList) {
+        System.out.println("api calls");
         if (newValue.length() > 3) {
             try (JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
                 CompletableFuture<String> jsonCompletableFuture = jsonHttpClient.sendRequestAsync(
@@ -174,6 +181,7 @@ public class AddRouteController implements Initializable {
 
         Tour tour = new Tour(
                 tourNameTextField.getText(),
+
                 descriptionTextField.getText(),
                 startPointTextField.getValue(),
                 startCoordinates.get(0), startCoordinates.get(1),

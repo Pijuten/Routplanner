@@ -20,8 +20,8 @@ import java.util.concurrent.CompletableFuture;
 @Log4j
 public class OptionBarViewModel {
     private final RoutBarViewModel routBarViewModel;
-    public OptionBarViewModel() {
-        routBarViewModel = new RoutBarViewModel();
+    public OptionBarViewModel(RoutBarViewModel routBarViewModel) {
+        this.routBarViewModel = routBarViewModel;
     }
     public void importTour(File selectedFile) {
         List<Tour> tours = null;
