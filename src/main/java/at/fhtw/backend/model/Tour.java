@@ -18,6 +18,7 @@ public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tourId;
+    private int tourPosition;
     private String tourName;
     private String description;
     private String startPoint;
@@ -55,6 +56,7 @@ public class Tour {
         return "{" +
                 "tourId=" + tourId +
                 ", tourName='" + tourName + '\'' +
+                ", tourPosition=" + tourPosition +
                 ", description='" + description + '\'' +
                 ", startPoint='" + startPoint + '\'' +
                 ", latStartPoint=" + latStartPoint +
