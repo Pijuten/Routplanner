@@ -108,13 +108,15 @@ public class RoutBarController implements Initializable {
         tourListView.refresh();
         routBarViewModel.editTour(tour);
     }
-    private void setupStage(Tour selectedTour){
-
+    private void setupStage(Tour selectedTour) {
         FXMLLoader loader = new FXMLLoader(
                 FXMLDependencyInjection.class.getResource("/at/fhtw/routplanner/view/addRoute.fxml"),
                 ResourceBundle.getBundle("at.fhtw.routplanner.view." + "gui_strings", Locale.GERMAN)
         );
         Parent root = null;
+        AddRouteController addRouteController = new AddRouteController();
+        addRouteController.setRoutBarController(this); // Set the controller here
+        loader.setController(addRouteController);
         try {
             root = loader.load();
         } catch (IOException e) {
@@ -123,9 +125,8 @@ public class RoutBarController implements Initializable {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
 
-        AddRouteController addRouteController = loader.getController();
+        // Ensure the controller is set after the FXMLLoader has loaded the FXML file
         addRouteController.setStage(stage);
-        addRouteController.setRoutBarController(this);
         addRouteController.setTour(selectedTour);
         addRouteController.setButtonAction();
         addRouteController.setComboBoxElements();

@@ -55,81 +55,34 @@ public class AddRouteController implements Initializable {
     @Setter
     private Stage stage;
 
-    private ObservableList<String> startpointItems = FXCollections.observableArrayList();
-    private ObservableList<String> endpointItems = FXCollections.observableArrayList();
 
-    private Map<String, List<Double>> coordinatesMap = new HashMap<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cancleButton.setOnAction(actionEvent -> stage.close());
-        startPointTextField.setItems(startpointItems);
+        startPointTextField.setItems(routBarController.routBarViewModel.getStartpointItems());
         startPointTextField.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
             // Check if the new value is not already in the list
             boolean isNewItem = startPointTextField.getItems().stream().noneMatch(item -> item.equals(newValue));
 
             if (isNewItem) {
-                updateEndpointTextField(newValue, startPointTextField, startpointItems);
+                routBarController.routBarViewModel.updateEndpointTextField(newValue, startPointTextField, routBarController.routBarViewModel.getStartpointItems());
                 if (!startPointTextField.isShowing()) {
                     startPointTextField.show();
                 }
             }
         });
-        endpointTextField.setItems(endpointItems);
+        endpointTextField.setItems(routBarController.routBarViewModel.getEndpointItems());
         endpointTextField.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
 
-            updateEndpointTextField(newValue, endpointTextField, endpointItems);
+            routBarController.routBarViewModel.updateEndpointTextField(newValue, endpointTextField, routBarController.routBarViewModel.getEndpointItems());
             if (!endpointTextField.isShowing()) {
                 endpointTextField.show();
             }
         });
     }
 
-    private void updateEndpointTextField(String newValue, ComboBox<String> comboBox, ObservableList<String> observableList) {
-        System.out.println("api calls");
-        if (newValue.length() > 3) {
-            try (JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
-                CompletableFuture<String> jsonCompletableFuture = jsonHttpClient.sendRequestAsync(
-                        null, "http://localhost:8080/route/geocode?locationname=" + newValue.replace(" ", "+"), JsonHttpClient.Method.GET
-                );
 
-                jsonCompletableFuture.handle((result, ex) -> {
-                    if (ex != null) {
-                        log.error("Request failed: " + ex.getMessage());
-                        return "Error occurred";
-                    } else {
-                        try {
-                            ObjectMapper objectMapper = new ObjectMapper();
-                            Geocoding geocoding = objectMapper.readValue(result, Geocoding.class);
-
-                            // Collecting the results in a local list
-                            List<String> names = new ArrayList<>();
-                            for (Feature feature : geocoding.getFeatures()) {
-                                String name = feature.getProperties().getName() + " " + feature.getProperties().getCountry_a();
-                                names.add(name);
-                                coordinatesMap.put(name, feature.getGeometry().getCoordinates());
-                            }
-
-                            // Update the observable list on the JavaFX Application Thread
-                            Platform.runLater(() -> {
-                                observableList.setAll(names);
-                                if (!names.isEmpty()) {
-                                    comboBox.show(); // Ensure the ComboBox dropdown is shown
-                                }
-                            });
-
-                        } catch (JsonProcessingException e) {
-                            throw new RuntimeException(e);
-                        }
-                        return result;
-                    }
-                });
-            }
-        } else {
-            // Clear the list if the input is not valid
-            Platform.runLater(observableList::clear);
-        }
-    }
 
     public void setComboBoxElements() {
         ObservableList<String> items = FXCollections.observableArrayList();
@@ -172,9 +125,9 @@ public class AddRouteController implements Initializable {
             return;
         }
 
-        List<Double> startCoordinates = coordinatesMap.get(startPointTextField.getValue());
-        List<Double> endCoordinates = coordinatesMap.get(endpointTextField.getValue());
-        List<Double> coordinates = coordinatesMap.get(startPointTextField.getValue());
+        List<Double> startCoordinates = routBarController.routBarViewModel.getCoordinatesMap().get(startPointTextField.getValue());
+        List<Double> endCoordinates = routBarController.routBarViewModel.getCoordinatesMap().get(endpointTextField.getValue());
+        List<Double> coordinates = routBarController.routBarViewModel.getCoordinatesMap().get(startPointTextField.getValue());
         coordinates.addAll(endCoordinates);
         Route route = new Route(coordinates, TransportType.fromDisplayName(vehicleComboBox.getValue()));
         Direction direction = routBarController.routBarViewModel.getDirection(route).get();
@@ -204,9 +157,9 @@ public class AddRouteController implements Initializable {
             return;
         }
 
-        List<Double> startCoordinates = coordinatesMap.get(startPointTextField.getValue());
-        List<Double> endCoordinates = coordinatesMap.get(endpointTextField.getValue());
-        List<Double> coordinates = coordinatesMap.get(startPointTextField.getValue());
+        List<Double> startCoordinates = routBarController.routBarViewModel.getCoordinatesMap().get(startPointTextField.getValue());
+        List<Double> endCoordinates = routBarController.routBarViewModel.getCoordinatesMap().get(endpointTextField.getValue());
+        List<Double> coordinates = routBarController.routBarViewModel.getCoordinatesMap().get(startPointTextField.getValue());
         coordinates.addAll(endCoordinates);
         Route route = new Route(coordinates, TransportType.fromDisplayName(vehicleComboBox.getValue()));
         Direction direction = routBarController.routBarViewModel.getDirection(route).get();

@@ -2,6 +2,8 @@ package at.fhtw.routplanner.viewModel;
 
 import at.fhtw.routplanner.JsonHttpClient;
 import at.fhtw.routplanner.model.OpenRoute.Direction.Direction;
+import at.fhtw.routplanner.model.OpenRoute.Geocode.Feature;
+import at.fhtw.routplanner.model.OpenRoute.Geocode.Geocoding;
 import at.fhtw.routplanner.model.Route;
 import at.fhtw.routplanner.model.Tour;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,12 +13,12 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 
@@ -144,6 +146,59 @@ public class RoutBarViewModel {
         tours.set(swapPosition, temp);
         for(Tour tour: tours){
             editTour(tour);
+        }
+    }
+
+    @Getter
+    private ObservableList<String> startpointItems = FXCollections.observableArrayList();
+    @Getter
+    private ObservableList<String> endpointItems = FXCollections.observableArrayList();
+
+    @Getter
+    private Map<String, List<Double>> coordinatesMap = new HashMap<>();
+    public void updateEndpointTextField(String newValue, ComboBox<String> comboBox, ObservableList<String> observableList) {
+        System.out.println("api calls");
+        if (newValue.length() > 3) {
+            try (JsonHttpClient jsonHttpClient = new JsonHttpClient()) {
+                CompletableFuture<String> jsonCompletableFuture = jsonHttpClient.sendRequestAsync(
+                        null, "http://localhost:8080/route/geocode?locationname=" + newValue.replace(" ", "+"), JsonHttpClient.Method.GET
+                );
+
+                jsonCompletableFuture.handle((result, ex) -> {
+                    if (ex != null) {
+                        log.error("Request failed: " + ex.getMessage());
+                        return "Error occurred";
+                    } else {
+                        try {
+                            ObjectMapper objectMapper = new ObjectMapper();
+                            Geocoding geocoding = objectMapper.readValue(result, Geocoding.class);
+
+                            // Collecting the results in a local list
+                            List<String> names = new ArrayList<>();
+                            for (Feature feature : geocoding.getFeatures()) {
+                                String name = feature.getProperties().getName() + " " + feature.getProperties().getCountry_a();
+                                names.add(name);
+                                coordinatesMap.put(name, feature.getGeometry().getCoordinates());
+                            }
+
+                            // Update the observable list on the JavaFX Application Thread
+                            Platform.runLater(() -> {
+                                observableList.setAll(names);
+                                if (!names.isEmpty()) {
+                                    comboBox.show(); // Ensure the ComboBox dropdown is shown
+                                }
+                            });
+
+                        } catch (JsonProcessingException e) {
+                            throw new RuntimeException(e);
+                        }
+                        return result;
+                    }
+                });
+            }
+        } else {
+            // Clear the list if the input is not valid
+            Platform.runLater(observableList::clear);
         }
     }
 }

@@ -15,7 +15,6 @@
 <?import at.fhtw.routplanner.CustomCombobox?>
 <BorderPane
         xmlns:fx="http://javafx.com/fxml"
-        fx:controller="at.fhtw.routplanner.controller.AddRouteController"
         maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
    <center>
        <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
