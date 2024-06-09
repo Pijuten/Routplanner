@@ -1,4 +1,4 @@
-/* Basisstile */
+
 .root {
     -fx-base: #f0f0f0;
     -fx-background-color: #ffffff;
@@ -43,7 +43,7 @@
     -fx-text-fill: #ffffff;
 }
 
-/* Erweiterte Stile */
+
 .tab-pane {
     -fx-background-color: #d6d6d6;
 }
@@ -75,13 +75,13 @@
 }
 
 .button {
-    -fx-background-color: #1976d2; /* Blaue Hintergrundfarbe für Buttons */
-    -fx-text-fill: white; /* Weiße Schrift für bessere Lesbarkeit */
-    -fx-border-color: transparent; /* Keine Grenzen für eine modernere Optik */
+    -fx-background-color: #1976d2;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
 }
 
 .button:hover {
-    -fx-background-color: #165a8f; /* Dunkleres Blau für Hover-Effekt */
+    -fx-background-color: #165a8f;
 }
 
 
